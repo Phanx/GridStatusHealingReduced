@@ -1,0 +1,18 @@
+﻿## Interface: 20400
+## Version: 1.1
+
+## Title: GridStatusHealingReduced
+## Notes: Adds a status indicator to Grid for debuffs which reduce the effectiveness of healing spells.
+## Author: Phanx
+
+## X-eMail: addons [at] phanx [dot] net
+## X-Website: http://phanx.net/addons/gridstatushealingreduced
+## X-RelSite-WoWI: 7470
+## X-RelSite-Curse: 8505
+## X-AceForum: 8127
+## X-Category: UnitFrame
+## X-GridStatusModule: GridStatusHealingReduced
+
+## Dependencies: Grid
+
+Core.lua
