@@ -8,6 +8,9 @@ local locale = GetLocale()
 local L = locale == "deDE" and {
 	["Healing Reduced"] = "Heilung reduziert",
 	["Healing Prevented"] = "Heilung verhindert",
+} or locale == "ruRU" and {
+	["Healing Reduced"] = "Исцеление уменьшено",
+	["Healing Prevented"] = "Препятствие исцелению",
 } or locale == "koKR" and {
 	["Healing Reduced"] = "치유량 감소",
 	["Healing Prevented"] = "치유량 방해",
