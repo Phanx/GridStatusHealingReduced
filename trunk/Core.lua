@@ -43,6 +43,7 @@ local healingReductionDebuffs = {
 	[GetSpellInfo(22859)] = true,	-- 0.50, -- Mortal Cleave (High Priestess Thekal - Zul'Gurub)
 	[GetSpellInfo(12294)] = true,	-- 0.50, -- Mortal Strike
 	[GetSpellInfo(28776)] = true,	-- 0.10, -- Necrotic Poison (Maexxna - Naxxramas)
+	[GetSpellInfo(45885)] = true, -- 0.50, -- Shadow Spike (Kil'jaeden- Sunwell Plateau)
 	[GetSpellInfo(35189)] = true,	-- 0.50, -- Solar Strike (Bloodwarder Slayer - The Mechanar)
 	[GetSpellInfo(32315)] = true,	-- 0.50, -- Soul Strike (Ethereal Crypt Raider - Mana-Tombs)
 	[GetSpellInfo(7068)]  = true,	-- 0.25, -- Veil of Shadow (Nefarian - Blackwing Lair)
