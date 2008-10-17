@@ -1,8 +1,32 @@
-----------------------------------------------------------------
---	GridStatusHealingReduced
---	Adds a Grid status for debuffs that reduce healing taken.
-----------------------------------------------------------------
--- TODO: Need translations for esES and frFR locales.
+--[[--------------------------------------------------------------------
+GridStatusHealingReduced
+	Adds a Grid status for debuffs which reduce healing received.
+	By Phanx
+	addons AT phanx net
+	http://www.wowinterface.com/downloads/info7364.html
+
+License:
+	Copyright © 2007-2008 Alyssa Kinley, aka Phanx.
+
+	You MAY NOT include this addon in compilations, or otherwise distribute
+	it without the express prior consent of its author.
+
+	You MAY freely distribute modified versions of this addon, provided that
+	the name of the modified version does not contain the name of this addon
+	or its author, and that all references to the name of this addon are
+	removed from the source code.
+
+Other:
+	For more information, see the included README text file, see the addon's
+	download page, or contact me by email at the address listed above.
+------------------------------------------------------------------------
+To-Do:
+	Improve debuff scanning efficiency by only looking for debuffs that can
+	exist in the player's current location; i.e, don't scan for Kil'jaeden's
+	Shadow Spike if the player is in Durotar.
+
+	Add translations for esES, esMX, and frFR locales.
+----------------------------------------------------------------------]]
 
 local locale = GetLocale()
 local L = locale == "deDE" and {
@@ -28,7 +52,7 @@ setmetatable(L, { __index = function(t, k) rawset(t, k, k); return k; end })
 local healingReductionDebuffs = {
 	[GetSpellInfo(19434)] = true,	-- 0.50, -- Aimed Shot
 	[GetSpellInfo(40599)] = true,	-- 0.50, -- Arcing Smash (Gurtogg Bloodboil - Black Temple)
-	[GetSpellInfo(23230)] = true,	-- 0.50, -- Blood Fury (Orc racial skill)
+--	[GetSpellInfo(23230)] = true,	-- 0.50, -- Blood Fury (Orc racial skill) -- REMOVED as of patch 3.0.2
 	[GetSpellInfo(23169)] = true,	-- 0.50, -- Brood Affliction: Green (Chromaggus - Blackwing Lair)
 	[GetSpellInfo(34073)] = true,	-- 0.85, -- Curse of the Bleeding Hollow (Bleeding Hollow orcs - Hellfire Peninsula)
 	[GetSpellInfo(13583)] = true,	-- 0.50, -- Curse of the Deadwood (Deadwood furbolgs - Felwood)
@@ -50,13 +74,13 @@ local healingReductionDebuffs = {
 	[GetSpellInfo(44534)] = true,	-- 0.50, -- Wretched Strike (Wretched Bruiser - Magister's Terrace)
 
 	[GetSpellInfo(32858)] = true,	-- -345, -- Touch of the Forgotten (Auchenai Soulpriest - Auchenai Crypts)
---	[GetSpellInfo(32377)] = true,	-- -690, -- Touch of the Forgotten (Auchenai Soulpriest - Auchenai Crypts)
+--	[GetSpellInfo(32377)] = true,	-- -690, -- Touch of the Forgotten (Auchenai Soulpriest - Auchenai Crypts) -- DUPLICATE; heroic version of above
 
 	[GetSpellInfo(45347)] = true,	-- 1 - (.04 * 25), -- Dark Touched (Lady Sacrolash - Sunwell Plateau)
 	[GetSpellInfo(30423)] = true,	-- 1 - (.01 * 99), -- Nether Portal - Dominance (Netherspite - Karazhan)
 	[GetSpellInfo(25646)] = true,	-- 1 - (.10 * 7),  -- Mortal Wound (Temporus - The Black Morass)
 	[GetSpellInfo(13218)] = true,	-- 1 - (.10 * 5),  -- Wound Poison
---	[GetSpellInfo(39665)] = true, -- 1 - (.20 * 5),  -- Wound Poison (Hex Lord Malacrass - Zul'Aman)
+--	[GetSpellInfo(39665)] = true, -- 1 - (.20 * 5),  -- Wound Poison (Hex Lord Malacrass - Zul'Aman) -- DUPLICATE; same name as rogue ability
 }
 
 local healingPreventionDebuffs = {
@@ -109,6 +133,8 @@ end
 
 local reduced, prevented, name, settings
 function GridStatusHealingReduced:UNIT_AURA(unit)
+	if not UnitInRaid(unit) or UnitInParty(unit) then return end
+
 	prevented = false
 	reduced = false
 
