@@ -1,31 +1,19 @@
 --[[--------------------------------------------------------------------
 GridStatusHealingReduced
-	Adds a Grid status for debuffs which reduce healing received.
-	By Phanx
-	addons AT phanx net
-	http://www.wowinterface.com/downloads/info7364.html
+Adds statuses to Grid for debuffs which reduce or prevent healing received.
+by Phanx < addons AT phanx net >
+http://www.wowinterface.com/downloads/info7364.html
+Please see the included README text file for license terms and additional information.
+----------------------------------------------------------------------]]
 
-License:
-	Copyright © 2007-2008 Alyssa Kinley, aka Phanx.
-
-	You MAY NOT include this addon in compilations, or otherwise distribute
-	it without the express prior consent of its author.
-
-	You MAY freely distribute modified versions of this addon, provided that
-	the name of the modified version does not contain the name of this addon
-	or its author, and that all references to the name of this addon are
-	removed from the source code.
-
-Other:
-	For more information, see the included README text file, see the addon's
-	download page, or contact me by email at the address listed above.
-------------------------------------------------------------------------
+--[[--------------------------------------------------------------------
 To-Do:
-	Improve debuff scanning efficiency by only looking for debuffs that can
-	exist in the player's current location; i.e, don't scan for Kil'jaeden's
-	Shadow Spike if the player is in Durotar.
 
-	Add translations for esES, esMX, and frFR locales.
+Improve debuff scanning efficiency by only looking for debuffs that can
+exist in the player's current location; i.e, don't scan for Kil'jaeden's
+Shadow Spike if the player is in Durotar.
+
+Add translations for esES, esMX, and frFR locales.
 ----------------------------------------------------------------------]]
 
 local locale = GetLocale()
