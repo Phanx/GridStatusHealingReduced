@@ -3,11 +3,14 @@
 
 ## Title: GridStatusHealingReduced
 ## Notes: Adds a status indicator to Grid for debuffs which reduce the effectiveness of healing spells.
-## Author: Phanx
 ## X-Category: UnitFrame
-## X-Copyright: Copyright© 2008 Alyssa Kinley, aka Phanx
 ## X-GridStatusModule: GridStatusHealingReduced
 ## X-Website: http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
+
+## Author: Phanx
+## X-Copyright: Copyright© 2008 Alyssa Kinley, aka Phanx
+## X-Email: phanx1337 AT gmail com
+## X-License: Do not distribute in any form without prior consent. See included README for full license terms.
 
 ## Dependencies: Grid
 
