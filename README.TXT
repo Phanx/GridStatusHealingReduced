@@ -6,17 +6,17 @@ effectiveness of healing spells.
 ------------------------------------------------------------------------
 Download:
 
-- http://www.wowinterface.com/downloads/info7364.html
+http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
+http://wow.curse.com/downloads/wow-addons/details/gridstatushealingreduced.aspx
 
 ------------------------------------------------------------------------
 Dependencies:
 
-GridStatusHealingReduced is a plugin for Grid, and will not do anything
-or even load if Grid is not installed and enabled. Grid can be found at
-the following URLs:
+GridStatusHealingReduced is a plugin for Grid, and therefore requires
+Grid to be installed and enabled. Grid can be downloaded from:
 
-- http://www.wowinterface.com/downloads/info5747.html
-- http://wow.curse.com/downloads/wow-addons/details/grid.aspx
+http://www.wowinterface.com/downloads/info5747-Grid.html
+http://wow.curse.com/downloads/wow-addons/details/grid.aspx
 
 ------------------------------------------------------------------------
 Usage:
@@ -40,7 +40,6 @@ large frame width.
 Localization:
 
 Compatible with: all locales.
-
 Translated into: enUS, deDE, ruRU, koKR, zhCN, zhTW.
 
 If you would like to assist with translation for any locale, please
@@ -62,22 +61,17 @@ If private communication is necessary, I can be contacted...
 ------------------------------------------------------------------------
 License:
 
-Copyright© 2007-2008 Alyssa Kinley, aka Phanx
+Copyright © 2007–2008 Alyssa Kinley, a.k.a. Phanx
 
-This addon is copyrighted, with all rights reserved, to its author under
-United States and international copyright law.
+The code in this addon is copyrighted to its author, with all rights reserved,
+under United States and international copyright law. The author of this addon
+hereby grants you the following rights:
 
-The author hereby grants you the following rights:
+You MAY download, install, and run this addon for your own personal use.
 
-You MAY download, install, and run this addon for personal use.
+You MAY NOT redistribute this addon, modified or unmodified, including as part
+of a compilation, without the express prior consent of its author.
 
-You MAY NOT distribute or redistribute this addon in any form, including
-as part of a compilation, without the express prior consent of its
-author.
-
-You MAY distribute modified or derivitave versions of this addon,
-provided that the name of your version does not include the name of this
-addon or its author, and that all references to the name of this addon
-and its author are removed from the source code of your version. As long
-as this condition is met in full, it is not required that you obtain the
-consent this addon's author in order to distribute your version.
+You MAY use the code from this addon, in whole or in part, in your own addon,
+provided that the name and code of your addon contain no references to the name
+of this addon or its author.
