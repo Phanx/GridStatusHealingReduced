@@ -61,17 +61,19 @@ If private communication is necessary, I can be contacted...
 ------------------------------------------------------------------------
 License:
 
-Copyright © 2007–2008 Alyssa Kinley, a.k.a. Phanx
+Copyright © 2007–2009 Alyssa Kinley, a.k.a. Phanx
 
-The code in this addon is copyrighted to its author, with all rights reserved,
-under United States and international copyright law. The author of this addon
-hereby grants you the following rights:
+The contents of this addon, excluding third-party resources, are copyrighted
+to its author with all rights reserved under United States and international 
+copyright law. You are hereby granted the following permissions, and agree
+to be bound by the following terms:
 
-You MAY download, install, and run this addon for your own personal use.
+You MAY download, install, run, and make modifications to this addon for your
+own personal use.
 
 You MAY NOT redistribute this addon, modified or unmodified, including as part
 of a compilation, without the express prior consent of its author.
 
-You MAY use the code from this addon, in whole or in part, in your own addon,
+You MAY use code from this addon, in whole or in part, in your own addon,
 provided that the name and code of your addon contain no references to the name
 of this addon or its author.

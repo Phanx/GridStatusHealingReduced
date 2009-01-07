@@ -41,7 +41,7 @@ end
 
 ----------------------------------------------------------------
 
-local reductionDebuffs = {
+local data_reduced = {
 	["*"] = {
 		[GetSpellInfo(19434)] = true,	-- 0.50, -- Aimed Shot
 --		[GetSpellInfo(23230)] = true,	-- 0.50, -- Blood Fury -- debuff component REMOVED in WoW 3.0
@@ -108,7 +108,7 @@ local reductionDebuffs = {
 	},
 }
 
-local preventionDebuffs = {
+local data_prevented = {
 	[L["Black Temple"]] = {
 		[GetSpellInfo(41292)] = true, -- Aura of Suffering (Essence of Suffering - Black Temple)
 	},
@@ -127,12 +127,16 @@ local GridStatusHealingReduced = GridStatus:NewModule("GridStatusHealingReduced"
 local UnitAura = UnitAura
 local UnitGUID = Grid:HasModule("GridRoster") and UnitGUID or UnitName
 
-local reduction_debuffs, prevention_debuffs, reduced_units, prevented_units, valid_units, db = {}, {}, {}, {}
+local debuffs_reduced, debuffs_prevented, units_reduced, units_prevented, valid_units, db = {}, {}, {}, {}
+
+local function debug(str)
+	print("|cffff7f7fGridStatusHealingReduced:|r " .. str)
+end
 
 GridStatusHealingReduced.menuName = L["Healing Reduced"]
 GridStatusHealingReduced.options = false
 GridStatusHealingReduced.defaultDB = {
-	debug = false,
+--	debug = false,
 	alert_healingReduced = {
 		text = L["Healing Reduced"],
 		enable = true,
@@ -150,6 +154,8 @@ GridStatusHealingReduced.defaultDB = {
 }
 
 function GridStatusHealingReduced:OnInitialize()
+--	debug("OnInitialize")
+	
 	self.super.OnInitialize(self)
 
 	self:RegisterStatus("alert_healingReduced", L["Healing Reduced"], nil, true)
@@ -174,6 +180,8 @@ function GridStatusHealingReduced:OnInitialize()
 end
 
 function GridStatusHealingReduced:OnEnable()
+--	debug("OnEnable")
+
 	self:RegisterEvent("UNIT_AURA")
 	self:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	self:RegisterEvent("RAID_ROSTER_UPDATE")
@@ -184,30 +192,45 @@ function GridStatusHealingReduced:OnEnable()
 end
 
 function GridStatusHealingReduced:RAID_ROSTER_UPDATE()
+--	debug("RAID_ROSTER_UPDATE")
+
 	if GetNumRaidMembers() > 0 then
+	--	debug("In raid")
 		valid_units = self.raid_units
 	else
+	--	debug("Not in raid")
 		valid_units = self.party_units
 	end
 end
 
 function GridStatusHealingReduced:ZONE_CHANGED_NEW_AREA()
-	wipe(reduction_debuffs)
-	wipe(prevention_debuffs)
+--	debug("ZONE_CHANGED_NEW_AREA")
+	
+	local zone = GetRealZoneText()
+	if not zone or string.len(zone) == 0 then return end
 
-	for debuff in pairs(reductionDebuffs["*"]) do
-		reduction_debuffs[debuff] = true
+	wipe(debuffs_reduced)
+	wipe(debuffs_prevented)
+
+--	debug("Adding reduction debuffs...")
+	for debuff in pairs(data_reduced["*"]) do
+	--	debug("Adding debuff: " .. debuff)
+		debuffs_reduced[debuff] = true
 	end
 
-	if reductionDebuffs[GetRealZoneText()] then
-		for debuff in pairs(reductionDebuffs[GetRealZoneText()]) do
-			reduction_debuffs[debuff] = true
+--	debug("Adding reduction debuffs for " .. zone .. "...")
+	if data_reduced[GetRealZoneText()] then
+		for debuff in pairs(data_reduced[zone]) do
+		--	debug("Adding debuff: " .. debuff)
+			debuffs_reduced[debuff] = true
 		end
 	end
 
-	if preventionDebuffs[GetRealZoneText()] then
-		for debuff in pairs(preventionDebuffs[GetRealZoneText()]) do
-			prevention_debuffs[debuff] = true
+--	debug("Adding prevention debuffs for " .. zone .. "...")
+	if data_prevented[GetRealZoneText()] then
+		for debuff in pairs(data_prevented[zone]) do
+		--	debug("Adding debuff: " .. debuff)
+			debuffs_prevented[debuff] = true
 		end
 	end
 end
@@ -215,39 +238,47 @@ end
 local reduced, prevented, settings
 function GridStatusHealingReduced:UNIT_AURA(unit)
 	if not valid_units[unit] then return end
+--	debug("UNIT_AURA, " .. unit)
 
 	prevented = false
 	reduced = false
 
-	for debuff in pairs(prevention_debuffs) do
-		if UnitAura(unit, debuff) then
+	for debuff in pairs(debuffs_prevented) do
+		if UnitDebuff(unit, debuff) then
+		--	debug("Healing prevented!")
 			prevented = true
 			break
 		end
 	end
 
-	if prevented and not prevented_units[unit] then
-		prevented_units[unit] = true
+	if prevented and not units_prevented[unit] then
+	--	debug("SendStatusGained")
+		units_prevented[unit] = true
 		settings = db.alert_healingPrevented
 		self.core:SendStatusGained(UnitGUID(unit), "alert_healingPrevented", settings.priority, (settings.range and 40), settings.color, settings.text)
-	elseif prevented_units[unit] then
-		prevented_units[unit] = false
+	elseif units_prevented[unit] then
+	--	debug("SendStatusLost")
+		units_prevented[unit] = false
 		self.core:SendStatusLost(UnitGUID(unit), "alert_healingPrevented")
 	end
 
-	for debuff in pairs(reduction_debuffs) do
-		if UnitAura(unit, debuff) then
+	for debuff in pairs(debuffs_reduced) do
+	--	debug("Scanning for " .. debuff .. "...")
+		if UnitDebuff(unit, debuff) then
+		--	debug("Healing reduced!")
 			reduced = true
 			break
 		end
 	end
 
-	if reduced and not reduced_units[units] then
-		reduced_units[unit] = true
+	if reduced and not units_reduced[units] then
+	--	debug("SendStatusGained")
+		units_reduced[unit] = true
 		settings = db.alert_healingReduced
 		self.core:SendStatusGained(UnitGUID(unit), "alert_healingReduced", settings.priority, (settings.range and 40), settings.color, settings.text)
-	elseif reduced_units[unit] then
-		reduced_units[unit] = false
+	elseif units_reduced[unit] then
+	--	debug("SendStatusLost")
+		units_reduced[unit] = false
 		self.core:SendStatusLost(UnitGUID(unit), "alert_healingReduced")
 	end
 end
