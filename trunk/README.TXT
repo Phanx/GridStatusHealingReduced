@@ -1,7 +1,8 @@
+------------------------------------------------------------------------
 
-GridStatusHealingReduced is World of Warcraft user interface addon to
-add aggregate statuses to the Grid addon for debuffs which reduce the
-effectiveness of healing spells.
+GridStatusHealingReduced is a World of Warcraft user interface addon to
+add aggregate statuses to Grid for debuffs which reduce or prevent
+healing received.
 
 ------------------------------------------------------------------------
 Download:
@@ -65,15 +66,16 @@ Copyright © 2007–2009 Alyssa Kinley, a.k.a. Phanx
 
 The contents of this addon, excluding third-party resources, are copyrighted
 to its author with all rights reserved under United States and international 
-copyright law. You are hereby granted the following permissions, and agree
-to be bound by the following terms:
+copyright law. You are hereby granted the following permissions:
 
-You MAY download, install, run, and make modifications to this addon for your
-own personal use.
+You MAY download, install, run, and make modifications to this addon for 
+your own personal use.
 
-You MAY NOT redistribute this addon, modified or unmodified, including as part
-of a compilation, without the express prior consent of its author.
+You MAY NOT redistribute this addon, modified or unmodified, including as 
+part of a compilation, without the express prior consent of its author.
 
 You MAY use code from this addon, in whole or in part, in your own addon,
-provided that the name and code of your addon contain no references to the name
-of this addon or its author.
+provided that the name and code of your addon contain no references to the 
+name of this addon or its author.
+
+------------------------------------------------------------------------

@@ -1,7 +1,12 @@
-----------------------------------------------------------------
---	GridStatusHealingReduced
---	Adds a Grid status for debuffs that reduce healing taken.
-----------------------------------------------------------------
+--[[--------------------------------------------------------------------
+	GridStatusHealingReduced
+	Adds aggregate statuses to Grid for debuffs which reduce or prevent healing received.
+	by Phanx < addons@phanx.net >
+	http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
+	http://wow.curse.com/downloads/wow-addons/details/gridstatushealingreduced.aspx
+	Copyright © 2007–2009 Alyssa S. Kinley, a.k.a. Phanx
+	Do not redistribute. See README for full license terms.
+----------------------------------------------------------------------]]
 
 local L = {}
 do
@@ -39,36 +44,40 @@ do
 	setmetatable(L, { __index = function(t, k) rawset(t, k, k) return k end })
 end
 
-----------------------------------------------------------------
+------------------------------------------------------------------------
 
 local data_reduced = {
 	["*"] = {
-		[GetSpellInfo(19434)] = true,	-- 0.50, -- Aimed Shot
---		[GetSpellInfo(23230)] = true,	-- 0.50, -- Blood Fury -- debuff component REMOVED in WoW 3.0
---		[GetSpellInfo(9035)]  = true,	-- 0.80, -- Hex of Weakness -- priest racial REMOVED in WoW 3.0
-		[GetSpellInfo(12294)] = true,	-- 0.50, -- Mortal Strike
-		[GetSpellInfo(13218)] = true,	-- 1 - (.10 * 5),  -- Wound Poison
+		[GetSpellInfo(19434)] = true,	-- 0.50, -- Aimed Shot (also various: see README)
+		[GetSpellInfo(12294)] = true,	-- 0.50, -- Mortal Strike (also various: see README)
+		[GetSpellInfo(13218)] = true,	-- 0.50, -- Wound Poison (also 43461: Hex Lord Malacrass, Zul'Aman)
+		[GetSpellInfo(13222)] = true,	-- 0.50, -- Wound Poison II
+		[GetSpellInfo(13223)] = true,	-- 0.50, -- Wound Poison III
+		[GetSpellInfo(13224)] = true,	-- 0.50, -- Wound Poison IV
+		[GetSpellInfo(27189)] = true,	-- 0.50, -- Wound Poison V
+		[GetSpellInfo(57974)] = true,	-- 0.50, -- Wound Poison VI
+		[GetSpellInfo(57975)] = true,	-- 0.50, -- Wound Poison VII
 	},
 	[L["Auchenai Crypts"]] = {
 		[GetSpellInfo(32858)] = true,	-- -345, -- Touch of the Forgotten (Auchenai Soulpriest)
---		[GetSpellInfo(32377)] = true,	-- -690, -- Touch of the Forgotten (Auchenai Soulpriest)
+	--	[GetSpellInfo(32377)] = true,	-- -690, -- Touch of the Forgotten (Auchenai Soulpriest) (Heroic)
 	},
 	[L["Black Temple"]] = {
 		[GetSpellInfo(40599)] = true,	-- 0.50, -- Arcing Smash (Gurtogg Bloodboil)
 	},
 	[L["Blackwing Lair"]] = {
 		[GetSpellInfo(23169)] = true,	-- 0.50, -- Brood Affliction: Green (Chromaggus)
-		[GetSpellInfo(7068)]  = true,	-- 0.25, -- Veil of Shadow (Nefarian)
+		[GetSpellInfo(7068)]  = true,	-- 0.75, -- Veil of Shadow (Nefarian)
 	},
 	[L["Felwood"]] = {
 		[GetSpellInfo(13583)] = true,	-- 0.50, -- Curse of the Deadwood (Deadwood furbolgs)
 	},
 	[L["Hellfire Peninsula"]] = {
-		[GetSpellInfo(34073)] = true,	-- 0.85, -- Curse of the Bleeding Hollow (Bleeding Hollow orcs)
+		[GetSpellInfo(34073)] = true,	-- 0.15, -- Curse of the Bleeding Hollow (Bleeding Hollow orcs)
 	},
 	[L["Karazhan"]] = {
 		[GetSpellInfo(32378)] = true,	-- 0.50, -- Filet (Spectral Chef)
-		[GetSpellInfo(30423)] = true,	-- 1 - (.01 * 99), -- Nether Portal - Dominance (Netherspite)
+		[GetSpellInfo(30423)] = true,	-- 0.01, -- Nether Portal - Dominance (Netherspite) (stacks to 99)
 	},
 	[L["Magister's Terrace"]] = {
 		[GetSpellInfo(44534)] = true,	-- 0.50, -- Wretched Strike (Wretched Bruiser)
@@ -77,28 +86,31 @@ local data_reduced = {
 		[GetSpellInfo(32315)] = true,	-- 0.50, -- Soul Strike (Ethereal Crypt Raider)
 	},
 	[L["Molten Core"]] = {
-		[GetSpellInfo(19716)] = true,	-- 0.25, -- Gehennas' Curse (Gehennas)
+		[GetSpellInfo(19716)] = true,	-- 0.75, -- Gehennas' Curse (Gehennas)
 	},
 	[L["Naxxramas"]] = {
-		[GetSpellInfo(28776)] = true,	-- 0.10, -- Necrotic Poison (Maexxna)
+		[GetSpellInfo(54378)] = true, -- 0.10, -- Mortal Wound (Gluth) (stacks to 10)
+	--	[GetSpellInfo(28467)] = true, -- 0.10, -- Mortal Wound (Unstoppable Abomination)
+	--	[GetSpellInfo(28776)] = true,	-- 0.90, -- Necrotic Poison (Maexxna) (Heroic)
+		[GetSpellInfo(54121)] = true,	-- 0.75, -- Necrotic Poison (Maexxna)
 	},
 	[L["Netherstorm"]] = {
-		[GetSpellInfo(34625)] = true,	-- 0.25, -- Demolish (Negatron)
+		[GetSpellInfo(34625)] = true,	-- 0.75, -- Demolish (Negatron)
 	},
 	[L["Shattered Halls"]] = {
 		[GetSpellInfo(36023)] = true,	-- 0.50, -- Deathblow (Shattered Hand Savage)
-		[GetSpellInfo(36054)] = true,	-- 0.50, -- Deathblow (Shattered Hand Savage)
+	--	[GetSpellInfo(36054)] = true,	-- 0.50, -- Deathblow (Shattered Hand Savage) (Heroic)
 	},
 	[L["Sunwell Plateau"]] = {
 		[GetSpellInfo(45885)] = true, -- 0.50, -- Shadow Spike (Kil'jaeden)
-		[GetSpellInfo(45347)] = true,	-- 1 - (.04 * 25), -- Dark Touched (Lady Sacrolash)
+		[GetSpellInfo(45347)] = true,	-- 0.04, -- Dark Touched (Lady Sacrolash) (stacks to 25)
 	},
 	[L["The Arcatraz"]] = {
 		[GetSpellInfo(36917)] = true,	-- 0.50, -- Magma-Thrower's Curse (Sulfuron Magma-Thrower)
 	},
 	[L["The Black Morass"]] = {
-		[GetSpellInfo(34366)] = true,	-- 0.75, -- Ebon Poison (Blackfang Tarantula)
-		[GetSpellInfo(25646)] = true,	-- 1 - (.10 * 7),  -- Mortal Wound (Temporuss)
+		[GetSpellInfo(34366)] = true,	-- 0.35, -- Ebon Poison (Blackfang Tarantula)
+	--	[GetSpellInfo(25646)] = true,	-- 0.10, -- Mortal Wound (Temporus) (stacks to 7)
 	},
 	[L["The Mechanar"]] = {
 		[GetSpellInfo(35189)] = true,	-- 0.50, -- Solar Strike (Bloodwarder Slayer)
@@ -110,17 +122,20 @@ local data_reduced = {
 
 local data_prevented = {
 	[L["Black Temple"]] = {
-		[GetSpellInfo(41292)] = true, -- Aura of Suffering (Essence of Suffering - Black Temple)
+		[GetSpellInfo(41292)] = true, -- Aura of Suffering (Essence of Suffering)
 	},
 	[L["Karazhan"]] = {
-		[GetSpellInfo(30843)] = true, -- Enfeeble (Prince Malchezaar - Karazhan)
+		[GetSpellInfo(30843)] = true, -- Enfeeble (Prince Malchezaar)
+	},
+	[L["Naxxramas"]] = {
+		[GetSpellInfo(55593)] = true, -- Necrotic Aura (Loatheb)
 	},
 	[L["Sunwell Plateau"]] = {
-		[GetSpellInfo(45996)] = true, -- Darkness (M'uru - Sunwell Plateau)
+		[GetSpellInfo(45996)] = true, -- Darkness (M'uru)
 	},
 }
 
-----------------------------------------------------------------
+------------------------------------------------------------------------
 
 local GridStatusHealingReduced = GridStatus:NewModule("GridStatusHealingReduced")
 
@@ -282,3 +297,5 @@ function GridStatusHealingReduced:UNIT_AURA(unit)
 		self.core:SendStatusLost(UnitGUID(unit), "alert_healingReduced")
 	end
 end
+
+------------------------------------------------------------------------
