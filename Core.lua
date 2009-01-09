@@ -142,7 +142,7 @@ local GridStatusHealingReduced = GridStatus:NewModule("GridStatusHealingReduced"
 local UnitAura = UnitAura
 local UnitGUID = Grid:HasModule("GridRoster") and UnitGUID or UnitName
 
-local debuffs_reduced, debuffs_prevented, units_reduced, units_prevented, valid_units, db = {}, {}, {}, {}
+local debuffs_reduced, debuffs_prevented, valid_units, db = {}, {}, {}, {}
 
 local function debug(str)
 	print("|cffff7f7fGridStatusHealingReduced:|r " .. str)
@@ -170,7 +170,7 @@ GridStatusHealingReduced.defaultDB = {
 
 function GridStatusHealingReduced:OnInitialize()
 --	debug("OnInitialize")
-	
+
 	self.super.OnInitialize(self)
 
 	self:RegisterStatus("alert_healingReduced", L["Healing Reduced"], nil, true)
@@ -220,7 +220,7 @@ end
 
 function GridStatusHealingReduced:ZONE_CHANGED_NEW_AREA()
 --	debug("ZONE_CHANGED_NEW_AREA")
-	
+
 	local zone = GetRealZoneText()
 	if not zone or string.len(zone) == 0 then return end
 
@@ -256,8 +256,6 @@ function GridStatusHealingReduced:UNIT_AURA(unit)
 --	debug("UNIT_AURA, " .. unit)
 
 	prevented = false
-	reduced = false
-
 	for debuff in pairs(debuffs_prevented) do
 		if UnitDebuff(unit, debuff) then
 		--	debug("Healing prevented!")
@@ -265,18 +263,16 @@ function GridStatusHealingReduced:UNIT_AURA(unit)
 			break
 		end
 	end
-
-	if prevented and not units_prevented[unit] then
+	if prevented then
 	--	debug("SendStatusGained")
-		units_prevented[unit] = true
 		settings = db.alert_healingPrevented
 		self.core:SendStatusGained(UnitGUID(unit), "alert_healingPrevented", settings.priority, (settings.range and 40), settings.color, settings.text)
-	elseif units_prevented[unit] then
+	else
 	--	debug("SendStatusLost")
-		units_prevented[unit] = false
 		self.core:SendStatusLost(UnitGUID(unit), "alert_healingPrevented")
 	end
 
+	reduced = false
 	for debuff in pairs(debuffs_reduced) do
 	--	debug("Scanning for " .. debuff .. "...")
 		if UnitDebuff(unit, debuff) then
@@ -285,15 +281,12 @@ function GridStatusHealingReduced:UNIT_AURA(unit)
 			break
 		end
 	end
-
-	if reduced and not units_reduced[units] then
+	if reduced then
 	--	debug("SendStatusGained")
-		units_reduced[unit] = true
 		settings = db.alert_healingReduced
 		self.core:SendStatusGained(UnitGUID(unit), "alert_healingReduced", settings.priority, (settings.range and 40), settings.color, settings.text)
-	elseif units_reduced[unit] then
+	else
 	--	debug("SendStatusLost")
-		units_reduced[unit] = false
 		self.core:SendStatusLost(UnitGUID(unit), "alert_healingReduced")
 	end
 end
