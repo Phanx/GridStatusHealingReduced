@@ -141,10 +141,10 @@ local data_prevented = {
 
 local GridStatusHealingReduced = GridStatus:NewModule("GridStatusHealingReduced")
 
-local UnitAura = UnitAura
-local UnitGUID = Grid:HasModule("GridRoster") and UnitGUID or UnitName
+local UnitDebuff = UnitDebuff
+local UnitGUID = UnitGUID
 
-local debuffs_reduced, debuffs_prevented, valid_units, enable_reduced, enable_prevented, db = {}, {}, {}
+local debuffs_reduced, debuffs_prevented, valid_units, enabled, db = {}, {}, {}, 0
 
 local function debug(str)
 	print("|cffff7f7fGridStatusHealingReduced:|r " .. str)
@@ -169,6 +169,8 @@ GridStatusHealingReduced.defaultDB = {
 		range = true,
 	}
 }
+
+------------------------------------------------------------------------
 
 function GridStatusHealingReduced:OnInitialize()
 --	debug("OnInitialize")
@@ -196,20 +198,21 @@ function GridStatusHealingReduced:OnInitialize()
 	end
 end
 
+function GridStatusHealingReduced:OnEnable()
+--	debug("OnEnable")
+
+	self.super.OnEnable(self)
+end
+
 function GridStatusHealingReduced:OnStatusEnable(status)
 --	debug("OnStatusEnable, " .. status)
 
-	if status == "alert_healingReduced" then
-		enable_reduced = true
-	end
-	if status == "alert_healingPrevented" then
-		enable_prevented = true
-	end
+	enabled = enabled + 1
 
-	self:RegisterEvent("UNIT_AURA")
-	self:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	self:RegisterEvent("RAID_ROSTER_UPDATE")
 	self:RegisterEvent("PARTY_MEMBERS_CHANGED", "RAID_ROSTER_UPDATE")
+	self:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+	self:RegisterEvent("UNIT_AURA", "UpdateUnit")
 
 	self:RAID_ROSTER_UPDATE()
 	self:ZONE_CHANGED_NEW_AREA()
@@ -220,14 +223,9 @@ end
 function GridStatusHealingReduced:OnStatusDisable(status)
 --	debug("OnStatusDisable, " .. status)
 
-	if status == "alert_healingReduced" then
-		enable_reduced = true
-	end
-	if status == "alert_healingPrevented" then
-		enable_prevented = true
-	end
+	enabled = enabled - 1
 
-	if not enable_reduced and not enable_prevented then
+	if enabled == 0 then
 		self:UnregisterEvent("UNIT_AURA")
 		self:UnregisterEvent("ZONE_CHANGED_NEW_AREA")
 		self:UnregisterEvent("RAID_ROSTER_UPDATE")
@@ -236,6 +234,59 @@ function GridStatusHealingReduced:OnStatusDisable(status)
 
 	self.core:SendStatusLostAllUnits(status)
 end
+
+------------------------------------------------------------------------
+
+function GridStatusHealingReduced:UpdateAllUnits()
+	if enabled > 0 then
+		for guid, unitid in GridRoster:IterateRoster() do
+			self:UpdateUnit(unitid)
+		end
+	end
+end
+
+local reduced, prevented, settings
+function GridStatusHealingReduced:UpdateUnit(unit)
+	if not valid_units[unit] then return end
+--	debug("UNIT_AURA, " .. unit)
+
+	prevented = false
+	for debuff in pairs(debuffs_prevented) do
+		if UnitDebuff(unit, debuff) then
+		--	debug("Healing prevented!")
+			prevented = true
+			break
+		end
+	end
+	if prevented then
+	--	debug("SendStatusGained")
+		settings = db.alert_healingPrevented
+		self.core:SendStatusGained(UnitGUID(unit), "alert_healingPrevented", settings.priority, (settings.range and 40), settings.color, settings.text)
+	else
+	--	debug("SendStatusLost")
+		self.core:SendStatusLost(UnitGUID(unit), "alert_healingPrevented")
+	end
+
+	reduced = false
+	for debuff in pairs(debuffs_reduced) do
+	--	debug("Scanning for " .. debuff .. "...")
+		if UnitDebuff(unit, debuff) then
+		--	debug("Healing reduced!")
+			reduced = true
+			break
+		end
+	end
+	if reduced then
+	--	debug("SendStatusGained")
+		settings = db.alert_healingReduced
+		self.core:SendStatusGained(UnitGUID(unit), "alert_healingReduced", settings.priority, (settings.range and 40), settings.color, settings.text)
+	else
+	--	debug("SendStatusLost")
+		self.core:SendStatusLost(UnitGUID(unit), "alert_healingReduced")
+	end
+end
+
+------------------------------------------------------------------------
 
 function GridStatusHealingReduced:RAID_ROSTER_UPDATE()
 --	debug("RAID_ROSTER_UPDATE")
@@ -278,47 +329,6 @@ function GridStatusHealingReduced:ZONE_CHANGED_NEW_AREA()
 		--	debug("Adding debuff: " .. debuff)
 			debuffs_prevented[debuff] = true
 		end
-	end
-end
-
-local reduced, prevented, settings
-function GridStatusHealingReduced:UNIT_AURA(unit)
-	if not valid_units[unit] then return end
---	debug("UNIT_AURA, " .. unit)
-
-	prevented = false
-	for debuff in pairs(debuffs_prevented) do
-		if UnitDebuff(unit, debuff) then
-		--	debug("Healing prevented!")
-			prevented = true
-			break
-		end
-	end
-	if prevented then
-	--	debug("SendStatusGained")
-		settings = db.alert_healingPrevented
-		self.core:SendStatusGained(UnitGUID(unit), "alert_healingPrevented", settings.priority, (settings.range and 40), settings.color, settings.text)
-	else
-	--	debug("SendStatusLost")
-		self.core:SendStatusLost(UnitGUID(unit), "alert_healingPrevented")
-	end
-
-	reduced = false
-	for debuff in pairs(debuffs_reduced) do
-	--	debug("Scanning for " .. debuff .. "...")
-		if UnitDebuff(unit, debuff) then
-		--	debug("Healing reduced!")
-			reduced = true
-			break
-		end
-	end
-	if reduced then
-	--	debug("SendStatusGained")
-		settings = db.alert_healingReduced
-		self.core:SendStatusGained(UnitGUID(unit), "alert_healingReduced", settings.priority, (settings.range and 40), settings.color, settings.text)
-	else
-	--	debug("SendStatusLost")
-		self.core:SendStatusLost(UnitGUID(unit), "alert_healingReduced")
 	end
 end
 
