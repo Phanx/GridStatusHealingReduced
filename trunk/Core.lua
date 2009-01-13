@@ -144,7 +144,7 @@ local GridStatusHealingReduced = GridStatus:NewModule("GridStatusHealingReduced"
 local UnitAura = UnitAura
 local UnitGUID = Grid:HasModule("GridRoster") and UnitGUID or UnitName
 
-local debuffs_reduced, debuffs_prevented, valid_units, db = {}, {}, {}, {}
+local debuffs_reduced, debuffs_prevented, valid_units, enable_reduced, enable_prevented, db = {}, {}, {}
 
 local function debug(str)
 	print("|cffff7f7fGridStatusHealingReduced:|r " .. str)
@@ -196,8 +196,15 @@ function GridStatusHealingReduced:OnInitialize()
 	end
 end
 
-function GridStatusHealingReduced:OnEnable()
---	debug("OnEnable")
+function GridStatusHealingReduced:OnStatusEnable(status)
+--	debug("OnStatusEnable, " .. status)
+
+	if status == "alert_healingReduced" then
+		enable_reduced = true
+	end
+	if status == "alert_healingPrevented" then
+		enable_prevented = true
+	end
 
 	self:RegisterEvent("UNIT_AURA")
 	self:RegisterEvent("ZONE_CHANGED_NEW_AREA")
@@ -206,6 +213,28 @@ function GridStatusHealingReduced:OnEnable()
 
 	self:RAID_ROSTER_UPDATE()
 	self:ZONE_CHANGED_NEW_AREA()
+
+	self:UpdateAllUnits()
+end
+
+function GridStatusHealingReduced:OnStatusDisable(status)
+--	debug("OnStatusDisable, " .. status)
+
+	if status == "alert_healingReduced" then
+		enable_reduced = true
+	end
+	if status == "alert_healingPrevented" then
+		enable_prevented = true
+	end
+
+	if not enable_reduced and not enable_prevented then
+		self:UnregisterEvent("UNIT_AURA")
+		self:UnregisterEvent("ZONE_CHANGED_NEW_AREA")
+		self:UnregisterEvent("RAID_ROSTER_UPDATE")
+		self:UnregisterEvent("PARTY_MEMBERS_CHANGED")
+	end
+
+	self.core:SendStatusLostAllUnits(status)
 end
 
 function GridStatusHealingReduced:RAID_ROSTER_UPDATE()
