@@ -90,12 +90,12 @@ local data_reduced = {
 		[GetSpellInfo(19716)] = true,	-- 0.75, -- Gehennas' Curse (Gehennas)
 	},
 	[L["Naxxramas"]] = {
-		[GetSpellInfo(54378)] = true, -- 0.10, -- Mortal Wound (Gluth) (stacks to 10)
 		[GetSpellInfo(28440)] = true,	-- 0.75, -- Veil of Shadow (Dread Creeper) (Heroic)
 	--	[GetSpellInfo(28467)] = true, -- 0.10, -- Mortal Wound (Unstoppable Abomination)
-	--	[GetSpellInfo(28776)] = true,	-- 0.90, -- Necrotic Poison (Maexxna) (Heroic)
-	--	[GetSpellInfo(53804)] = true,	-- 0.75, -- Veil of Shadow (Dread Creeper)
-		[GetSpellInfo(54121)] = true,	-- 0.75, -- Necrotic Poison (Maexxna)
+		[GetSpellInfo(28776)] = true,	-- 0.90, -- Necrotic Poison (Maexxna) (Heroic)
+	--	[GetSpellInfo(53804)] = true,	-- 0.50, -- Veil of Shadow (Dread Creeper)
+	--	[GetSpellInfo(54121)] = true,	-- 0.75, -- Necrotic Poison (Maexxna)
+		[GetSpellInfo(54378)] = true, -- 0.10, -- Mortal Wound (Gluth) (stacks to 10)
 	},
 	[L["Netherstorm"]] = {
 		[GetSpellInfo(34625)] = true,	-- 0.75, -- Demolish (Negatron)
@@ -145,6 +145,7 @@ local data_prevented = {
 
 local GridStatusHealingReduced = GridStatus:NewModule("GridStatusHealingReduced")
 
+local GetNumRaidMembers = GetNumRaidMembers
 local UnitDebuff = UnitDebuff
 local UnitGUID = UnitGUID
 
