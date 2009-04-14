@@ -46,6 +46,7 @@ end
 
 ------------------------------------------------------------------------
 
+-- Debuffs which reduce healing received
 local data_reduced = {
 	["*"] = {
 		[GetSpellInfo(19434)] = true,	-- 0.50, -- Aimed Shot (also various: see README)
@@ -65,6 +66,7 @@ local data_reduced = {
 	},
 	[L["Black Temple"]] = {
 		[GetSpellInfo(40599)] = true,	-- 0.50, -- Arcing Smash (Gurtogg Bloodboil)
+		[GetSpellInfo(25646)] = true, -- 0.10, -- Mortal Wound (Bonechewer Spectator) (stacks: 10)
 	},
 	[L["Blackwing Lair"]] = {
 		[GetSpellInfo(23169)] = true,	-- 0.50, -- Brood Affliction: Green (Chromaggus)
@@ -75,6 +77,10 @@ local data_reduced = {
 	},
 	[L["Hellfire Peninsula"]] = {
 		[GetSpellInfo(34073)] = true,	-- 0.15, -- Curse of the Bleeding Hollow (Bleeding Hollow orcs)
+	},
+	[L["Hellfire Ramparts"]] = {
+		[GetSpellInfo(36814)] = true,	-- 0.10, -- Mortal Wound (Watchkeeper Gargolmar) (stacks: 8) (Heroic)
+	--	[GetSpellInfo(30641)] = true,	-- 0.10, -- Mortal Wound (Watchkeeper Gargolmar) (stacks: 8)
 	},
 	[L["Karazhan"]] = {
 		[GetSpellInfo(32378)] = true,	-- 0.50, -- Filet (Spectral Chef)
@@ -100,6 +106,9 @@ local data_reduced = {
 	[L["Netherstorm"]] = {
 		[GetSpellInfo(34625)] = true,	-- 0.75, -- Demolish (Negatron)
 	},
+	[L["Ruins of Ahn'Qiraj"]] = {
+		[GetSpellInfo(25646)] = true, -- 0.10, -- Mortal Wound (Kurinnaxx) (stacks: 10)
+	},
 	[L["Shattered Halls"]] = {
 		[GetSpellInfo(36023)] = true,	-- 0.50, -- Deathblow (Shattered Hand Savage)
 	--	[GetSpellInfo(36054)] = true,	-- 0.50, -- Deathblow (Shattered Hand Savage) (Heroic)
@@ -107,6 +116,9 @@ local data_reduced = {
 	[L["Sunwell Plateau"]] = {
 		[GetSpellInfo(45885)] = true, -- 0.50, -- Shadow Spike (Kil'jaeden)
 		[GetSpellInfo(45347)] = true,	-- 0.04, -- Dark Touched (Lady Sacrolash) (stacks to 25)
+	},
+	[L["Temple of Ahn'Qiraj"]] = {
+		[GetSpellInfo(25646)] = true, -- 0.10, -- Mortal Wound (Fankriss the Unyielding) (stacks: 10)
 	},
 	[L["The Arcatraz"]] = {
 		[GetSpellInfo(36917)] = true,	-- 0.50, -- Magma-Thrower's Curse (Sulfuron Magma-Thrower)
@@ -120,12 +132,14 @@ local data_reduced = {
 	},
 	[L["The Violet Hold"]] = {
 		[GetSpellInfo(59525)] = true, -- 0.15, -- Ray of Pain (Moragg)
+		[GetSpellInfo(54525)] = true, -- 0.20, -- Shroud of Darkness (Zuramat the Obliterator) (stacks: 5)
 	},
 	[L["Zul'Gurub"]] = {
 		[GetSpellInfo(22859)] = true,	-- 0.50, -- Mortal Cleave (High Priestess Thekal)
 	},
 }
 
+-- Debuffs which prevent healing received
 local data_prevented = {
 	[L["Black Temple"]] = {
 		[GetSpellInfo(41292)] = true, -- Aura of Suffering (Essence of Suffering)
@@ -250,15 +264,16 @@ function GridStatusHealingReduced:UpdateAllUnits()
 	end
 end
 
-local reduced, prevented, settings
 function GridStatusHealingReduced:UpdateUnit(unit)
 	if not valid_units[unit] then return end
 --	debug("UNIT_AURA, " .. unit)
+	local reduced, prevented, settings, icon, start, duration, stacks, _
 
 	prevented = false
 	for debuff in pairs(debuffs_prevented) do
 		if UnitDebuff(unit, debuff) then
-		--	debug("Healing prevented!")
+		--	debug("Healing prevented: " .. debuff)
+			_, _, icon, count, _, duration, expirationTime = UnitDebuff(unit, debuff)
 			prevented = true
 			break
 		end
@@ -266,7 +281,7 @@ function GridStatusHealingReduced:UpdateUnit(unit)
 	if prevented then
 	--	debug("SendStatusGained")
 		settings = db.alert_healingPrevented
-		self.core:SendStatusGained(UnitGUID(unit), "alert_healingPrevented", settings.priority, (settings.range and 40), settings.color, settings.text)
+		self.core:SendStatusGained(UnitGUID(unit), "alert_healingPrevented", settings.priority, (settings.range and 40), settings.color, settings.text, nil, nil, icon, expirationTime - duration, count)
 	else
 	--	debug("SendStatusLost")
 		self.core:SendStatusLost(UnitGUID(unit), "alert_healingPrevented")
@@ -274,9 +289,9 @@ function GridStatusHealingReduced:UpdateUnit(unit)
 
 	reduced = false
 	for debuff in pairs(debuffs_reduced) do
-	--	debug("Scanning for " .. debuff .. "...")
 		if UnitDebuff(unit, debuff) then
-		--	debug("Healing reduced!")
+		--	debug("Healing reduced: " .. debuff)
+			_, _, icon, count, _, duration, expirationTime = UnitDebuff(unit, debuff)
 			reduced = true
 			break
 		end
@@ -284,7 +299,7 @@ function GridStatusHealingReduced:UpdateUnit(unit)
 	if reduced then
 	--	debug("SendStatusGained")
 		settings = db.alert_healingReduced
-		self.core:SendStatusGained(UnitGUID(unit), "alert_healingReduced", settings.priority, (settings.range and 40), settings.color, settings.text)
+		self.core:SendStatusGained(UnitGUID(unit), "alert_healingReduced", settings.priority, (settings.range and 40), settings.color, settings.text, nil, nil, icon, expirationTime - duration, count)
 	else
 	--	debug("SendStatusLost")
 		self.core:SendStatusLost(UnitGUID(unit), "alert_healingReduced")
