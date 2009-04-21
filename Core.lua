@@ -4,8 +4,9 @@
 	by Phanx < addons@phanx.net >
 	http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 	http://wow.curse.com/downloads/wow-addons/details/gridstatushealingreduced.aspx
-	Copyright © 2007–2009 Alyssa S. Kinley, a.k.a. Phanx
-	Do not redistribute. See README for full license terms.
+
+	Alyssa "Phanx" Kinley hereby grants anyone the right to use this work for any purpose,
+	without any conditions, unless such conditions are required by law.
 ----------------------------------------------------------------------]]
 
 local L = {}
@@ -37,11 +38,11 @@ do
 			L["Healing Reduced"] = "治療效果被降低"
 			L["Healing Prevented"] = "治療無效果"
 		end
-		for english, localized in pairs(LibStub("LibBabble-Zone-3.0"):GetLookupTable()) do
-			L[english] = localized
+		for k, v in pairs(LibStub("LibBabble-Zone-3.0"):GetLookupTable()) do
+			L[k] = v
 		end
 	end
-	setmetatable(L, { __index = function(t, k) rawset(t, k, k) return k end })
+	setmetatable(L, { __index = function(t, k) t[k] = k return k end })
 end
 
 ------------------------------------------------------------------------

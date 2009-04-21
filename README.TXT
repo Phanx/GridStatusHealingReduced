@@ -1,8 +1,7 @@
 ------------------------------------------------------------------------
 
-GridStatusHealingReduced is a World of Warcraft user interface addon to
-add aggregate statuses to Grid for debuffs which reduce or prevent
-healing received.
+GridStatusHealingReduced adds generic statuses to Grid for debuffs which
+reduce or prevent healing received.
 
 ------------------------------------------------------------------------
 Download:
@@ -33,9 +32,7 @@ indicates the presence of any debuff which reduces healing received by
 
 These statuses are configurable in the usual ways, including color and
 priority, and can be placed on any indicator, including those added by
-other plugins. Bear in mind that placing one of these statuses on a text
-indicator will probably not work very well, unless you have set a very
-large frame width.
+other plugins.
 
 ------------------------------------------------------------------------
 Localization:
@@ -62,20 +59,7 @@ If private communication is necessary, I can be contacted...
 ------------------------------------------------------------------------
 License:
 
-Copyright © 2007–2009 Alyssa Kinley, a.k.a. Phanx
-
-The contents of this addon, excluding third-party resources, are copyrighted
-to its author with all rights reserved under United States and international 
-copyright law. You are hereby granted the following permissions:
-
-You MAY download, install, run, and make modifications to this addon for 
-your own personal use.
-
-You MAY NOT redistribute this addon, modified or unmodified, including as 
-part of a compilation, without the express prior consent of its author.
-
-You MAY use code from this addon, in whole or in part, in your own addon,
-provided that the name and code of your addon contain no references to the 
-name of this addon or its author.
+Alyssa "Phanx" Kinley hereby grants anyone the right to use this work for any purpose,
+without any conditions unless such conditions are required by law.
 
 ------------------------------------------------------------------------
