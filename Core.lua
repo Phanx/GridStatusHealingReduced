@@ -2,11 +2,10 @@
 	GridStatusHealingReduced
 	Adds aggregate statuses to Grid for debuffs which reduce or prevent healing received.
 	by Phanx < addons@phanx.net >
+	Copyright © 2008–2009 Alyssa "Phanx" Kinley
+	See README for license terms and additional information.
 	http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 	http://wow.curse.com/downloads/wow-addons/details/gridstatushealingreduced.aspx
-
-	Alyssa "Phanx" Kinley hereby grants anyone the right to use this work for any purpose,
-	without any conditions, unless such conditions are required by law.
 ----------------------------------------------------------------------]]
 
 local L = {}
@@ -82,6 +81,9 @@ local data_reduced = {
 	[L["Hellfire Ramparts"]] = {
 		[GetSpellInfo(36814)] = true,	-- 0.10, -- Mortal Wound (Watchkeeper Gargolmar) (stacks: 8) (Heroic)
 	--	[GetSpellInfo(30641)] = true,	-- 0.10, -- Mortal Wound (Watchkeeper Gargolmar) (stacks: 8)
+	},
+	[L["Icecrown"]] = {
+		[GetSpellInfo(60626)] = true, -- 0.10, -- Necrotic Strike (Undying Minion) (stacks to 10)
 	},
 	[L["Karazhan"]] = {
 		[GetSpellInfo(32378)] = true,	-- 0.50, -- Filet (Spectral Chef)
