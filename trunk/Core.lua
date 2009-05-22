@@ -137,6 +137,9 @@ local data_reduced = {
 		[GetSpellInfo(59525)] = true, -- 0.15, -- Ray of Pain (Moragg)
 		[GetSpellInfo(54525)] = true, -- 0.20, -- Shroud of Darkness (Zuramat the Obliterator) (stacks: 5)
 	},
+	[L["Ulduar"]] = {
+		[GetSpellInfo(63038)] = true, -- 0.25, -- Dark Volley (Guardian of Yogg-Saron)
+	},
 	[L["Zul'Gurub"]] = {
 		[GetSpellInfo(22859)] = true,	-- 0.50, -- Mortal Cleave (High Priestess Thekal)
 	},
