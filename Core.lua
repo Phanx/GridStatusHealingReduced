@@ -140,6 +140,9 @@ local data_reduced = {
 	[L["Ulduar"]] = {
 		[GetSpellInfo(63038)] = true, -- 0.25, -- Dark Volley (Guardian of Yogg-Saron)
 	},
+	[L["Zul'Drak"]] = {
+		[GetSpellInfo(52645)] = true, -- 0.20, -- Hex of Weakness (Zol'Maz Stronghold Cache)
+	},
 	[L["Zul'Gurub"]] = {
 		[GetSpellInfo(22859)] = true,	-- 0.50, -- Mortal Cleave (High Priestess Thekal)
 	},
