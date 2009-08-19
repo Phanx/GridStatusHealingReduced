@@ -51,6 +51,7 @@ local data_reduced = {
 	["*"] = {
 		[GetSpellInfo(19434)] = true,	-- 0.50, -- Aimed Shot (also various: see README)
 		[GetSpellInfo(56112)] = true, -- 0.25, -- Furious Attacks (stacks: 2)
+		[GetSpellInfo(48301)] = true, -- 0.20, -- Mind Trauma (shadow priest)
 		[GetSpellInfo(12294)] = true,	-- 0.50, -- Mortal Strike (also various: see README)
 		[GetSpellInfo(13218)] = true,	-- 0.50, -- Wound Poison (also 43461: Hex Lord Malacrass, Zul'Aman)
 		[GetSpellInfo(13222)] = true,	-- 0.50, -- Wound Poison II
