@@ -16,10 +16,5 @@
 ## X-Email: addons@phanx.net
 
 ## Dependencies: Grid
-## OptionalDeps: LibBabble-Zone-3.0
-
-Libs\LibStub\LibStub.lua
-Libs\LibBabble-3.0.lua
-Libs\LibBabble-Zone-3.0.lua
 
 Core.lua
