@@ -222,12 +222,14 @@ function GridStatusHealingReduced:UpdateUnit(unit)
 		if not name then
 			break
 		end
-		if debuffs_prevented[name] then
-			prevented = true
-			reduced = false
-			break
-		elseif not reduced and debuffs_reduced[name] then
-			reduced = true
+		if duration then
+			if debuffs_prevented[name] then
+				prevented = true
+				reduced = false
+				break
+			elseif not reduced and debuffs_reduced[name] then
+				reduced = true
+			end
 		end
 	end
 
