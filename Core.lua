@@ -236,7 +236,7 @@ function GridStatusHealingReduced:UpdateUnit(unit)
 	if prevented then
 	--	debug("SendStatusGained")
 		settings = db.alert_healingPrevented
-		self.core:SendStatusGained(UnitGUID(unit), "alert_healingPrevented", settings.priority, (settings.range and 40), settings.color, settings.text, nil, nil, icon, expirationTime - duration, count)
+		self.core:SendStatusGained(UnitGUID(unit), "alert_healingPrevented", settings.priority, (settings.range and 40), settings.color, settings.text, nil, nil, icon, expirationTime and (expirationTime - duration), count)
 	else
 	--	debug("SendStatusLost")
 		self.core:SendStatusLost(UnitGUID(unit), "alert_healingPrevented")
@@ -245,7 +245,7 @@ function GridStatusHealingReduced:UpdateUnit(unit)
 	if reduced then
 	--	debug("SendStatusGained")
 		settings = db.alert_healingReduced
-		self.core:SendStatusGained(UnitGUID(unit), "alert_healingReduced", settings.priority, (settings.range and 40), settings.color, settings.text, nil, nil, icon, expirationTime - duration, count)
+		self.core:SendStatusGained(UnitGUID(unit), "alert_healingReduced", settings.priority, (settings.range and 40), settings.color, settings.text, nil, nil, icon, expirationTime and (expirationTime - duration), count)
 	else
 	--	debug("SendStatusLost")
 		self.core:SendStatusLost(UnitGUID(unit), "alert_healingReduced")
