@@ -12,26 +12,26 @@ local L = {}
 do
 	local locale = GetLocale()
 	if locale == "deDE" then
-		L["Healing Reduced"] = "Heilung reduziert"
-		L["Healing Prevented"] = "Heilung verhindert"
+		L["Healing reduced"] = "Heilung reduziert"
+		L["Healing prevented"] = "Heilung verhindert"
 	elseif locale == "esES" or locale == "esMX" then
-		L["Healing Reduced"] = "Sanación reducida"
-		L["Healing Prevented"] = "Sanación impedida"
+		L["Healing reduced"] = "Sanación reducida"
+		L["Healing prevented"] = "Sanación impedida"
 	elseif locale == "frFR" then
-		L["Healing Reduced"] = "Soins diminués"
-		L["Healing Prevented"] = "Soins empêché"
+		L["Healing reduced"] = "Soins diminués"
+		L["Healing prevented"] = "Soins empêché"
 	elseif locale == "ruRU" then
-		L["Healing Reduced"] = "Исцеление уменьшено"
-		L["Healing Prevented"] = "Препятствие исцелению"
+		L["Healing reduced"] = "Исцеление уменьшено"
+		L["Healing prevented"] = "Препятствие исцелению"
 	elseif locale == "koKR" then
-		L["Healing Reduced"] = "치유량 감소"
-		L["Healing Prevented"] = "치유량 방해"
+		L["Healing reduced"] = "치유량 감소"
+		L["Healing prevented"] = "치유량 방해"
 	elseif locale == "zhCN" then
-		L["Healing Reduced"] = "治疗效果被降低"
-		L["Healing Prevented"] = "治疗无效果"
+		L["Healing reduced"] = "治疗效果被降低"
+		L["Healing prevented"] = "治疗无效果"
 	elseif locale == "zhTW" then
-		L["Healing Reduced"] = "治療效果被降低"
-		L["Healing Prevented"] = "治療無效果"
+		L["Healing reduced"] = "治療效果被降低"
+		L["Healing prevented"] = "治療無效果"
 	end
 	setmetatable(L, { __index = function(t, k) t[k] = k return k end })
 end
@@ -107,29 +107,27 @@ local GetNumRaidMembers = GetNumRaidMembers
 local UnitDebuff = UnitDebuff
 local UnitGUID = UnitGUID
 
-local valid_units, enabled, db = {}, 0
+local party_units, raid_units, valid_units, enabled, db = { }, { }, { }, 0
 
 local function debug(str)
 	print("|cffff7f7fGridStatusHealingReduced:|r " .. str)
 end
 
-GridStatusHealingReduced.menuName = L["Healing Reduced"]
 GridStatusHealingReduced.options = false
 GridStatusHealingReduced.defaultDB = {
---	debug = false,
 	alert_healingReduced = {
-		text = L["Healing Reduced"],
+		text = L["Healing reduced"],
 		enable = true,
 		color = { r = 0.8, g = 0.4, b = 0.8, a = 1 },
 		priority = 90,
-		range = true,
+		range = false,
 	},
 	alert_healingPrevented = {
-		text = L["Healing Prevented"],
+		text = L["Healing prevented"],
 		enable = true,
 		color = { r = 0.6, g = 0.2, b = 0.6, a = 1 },
 		priority = 99,
-		range = true,
+		range = false,
 	}
 }
 
@@ -140,24 +138,21 @@ function GridStatusHealingReduced:OnInitialize()
 
 	self.super.OnInitialize(self)
 
-	self:RegisterStatus("alert_healingReduced", L["Healing Reduced"], nil, true)
-	self:RegisterStatus("alert_healingPrevented", L["Healing Prevented"], nil, true)
+	self:RegisterStatus("alert_healingReduced", L["Healing reduced"], nil, true)
+	self:RegisterStatus("alert_healingPrevented", L["Healing prevented"], nil, true)
 
 	db = self.db.profile
 
-	self.raid_units = {}
 	for i = 1, 40 do
-		self.raid_units["raid"..i] = true
-		self.raid_units["raidpet"..i] = true
+		raid_units["raid"..i] = true
+		raid_units["raidpet"..i] = true
 	end
 
-	self.party_units = {
-		player = true,
-		pet = true,
-	}
+	party_units["player"] = true
+	party_units["pet"] = true
 	for i = 1, 4 do
-		self.party_units["party"..i] = true
-		self.party_units["partypet"..i] = true
+		party_units["party"..i] = true
+		party_units["partypet"..i] = true
 	end
 end
 
@@ -253,10 +248,10 @@ function GridStatusHealingReduced:RAID_ROSTER_UPDATE()
 
 	if GetNumRaidMembers() > 0 then
 	--	debug("In raid")
-		valid_units = self.raid_units
+		valid_units = raid_units
 	else
 	--	debug("Not in raid")
-		valid_units = self.party_units
+		valid_units = party_units
 	end
 end
 
