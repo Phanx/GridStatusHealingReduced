@@ -14,15 +14,12 @@ do
 	if locale == "deDE" then
 		L["Healing Reduced"] = "Heilung reduziert"
 		L["Healing Prevented"] = "Heilung verhindert"
---	elseif locale == "esES" then
---		L["Healing Reduced"] = ""
---		L["Healing Prevented"] = ""
---	elseif locale == "esMX" then
---		L["Healing Reduced"] = ""
---		L["Healing Prevented"] = ""
---	elseif locale == "frFR" then
---		L["Healing Reduced"] = ""
---		L["Healing Prevented"] = ""
+	elseif locale == "esES" or locale == "esMX" then
+		L["Healing Reduced"] = "Sanación reducida"
+		L["Healing Prevented"] = "Sanación impedida"
+	elseif locale == "frFR" then
+		L["Healing Reduced"] = "Soins diminués"
+		L["Healing Prevented"] = "Soins empêché"
 	elseif locale == "ruRU" then
 		L["Healing Reduced"] = "Исцеление уменьшено"
 		L["Healing Prevented"] = "Препятствие исцелению"
@@ -41,68 +38,65 @@ end
 
 ------------------------------------------------------------------------
 
+local function GetSpellName(spellID)
+	local name = GetSpellInfo(spellID)
+	return name or ""
+end
+
 -- Debuffs which reduce healing received
 local debuffs_reduced = {
-	[GetSpellInfo(19434)] = true,	-- 0.50, -- Aimed Shot
-	[GetSpellInfo(56112)] = true, -- 0.25, -- Furious Attacks
-	[GetSpellInfo(48301)] = true, -- 0.20, -- Mind Trauma
-	[GetSpellInfo(12294)] = true,	-- 0.50, -- Mortal Strike
-	[GetSpellInfo(13218)] = true,	-- 0.50, -- Wound Poison
---	[GetSpellInfo(43461)] = true,	-- 0.50, -- Wound Poison / Hex Lord Malacrass / Zul'Gurub
-	[GetSpellInfo(13222)] = true,	-- 0.50, -- Wound Poison II
-	[GetSpellInfo(13223)] = true,	-- 0.50, -- Wound Poison III
-	[GetSpellInfo(13224)] = true,	-- 0.50, -- Wound Poison IV
-	[GetSpellInfo(27189)] = true,	-- 0.50, -- Wound Poison V
-	[GetSpellInfo(57974)] = true,	-- 0.50, -- Wound Poison VI
-	[GetSpellInfo(57975)] = true,	-- 0.50, -- Wound Poison VII
-
---	[GetSpellInfo(32858)] = true,	-- -345, -- Touch of the Forgotten / Auchenai Soulpriest / Auchenai Crypts
-	[GetSpellInfo(38377)] = true,	-- -690, -- Touch of the Forgotten / Auchenai Soulpriest / Auchenai Crypts (Heroic)
-
-	[GetSpellInfo(40599)] = true,	-- 0.50, -- Arcing Smash / Gurtogg Bloodboil / Black Temple
-	[GetSpellInfo(34073)] = true,	-- 0.15, -- Curse of the Bleeding Hollow / Bleeding Hollow orcs / Hellfire Peninsula
-	[GetSpellInfo(13583)] = true,	-- 0.50, -- Curse of the Deadwood / Deadwood furbolgs / Felwood
-	[GetSpellInfo(23169)] = true,	-- 0.50, -- Brood Affliction: Green / Chromaggus / Blackwing Lair
-	[GetSpellInfo(45347)] = true,	-- 0.04, -- Dark Touched / Lady Sacrolash / Sunwell Plateau / stacks to 25
-	[GetSpellInfo(63038)] = true, -- 0.25, -- Dark Volley / Guardian of Yogg-Saron / Ulduar
---	[GetSpellInfo(36023)] = true,	-- 0.50, -- Deathblow / Shattered Hand Savage / Shattered Halls
-	[GetSpellInfo(36054)] = true,	-- 0.50, -- Deathblow / Shattered Hand Savage / Shattered Halls (Heroic)
-	[GetSpellInfo(34625)] = true,	-- 0.75, -- Demolish / Negatron / Netherstorm
-	[GetSpellInfo(34366)] = true,	-- 0.35, -- Ebon Poison / Blackfang Tarantula / The Black Morass
-	[GetSpellInfo(32378)] = true,	-- 0.50, -- Filet / Spectral Chef / Karazhan
-	[GetSpellInfo(19716)] = true,	-- 0.75, -- Gehennas' Curse / Gehennas / Molten Core
-	[GetSpellInfo(52645)] = true, -- 0.20, -- Hex of Weakness / Zol'Maz Stronghold Cache / Zul'Drak
-	[GetSpellInfo(36917)] = true,	-- 0.50, -- Magma-Thrower's Curse / Sulfuron Magma-Thrower / The Arcatraz
-	[GetSpellInfo(22859)] = true,	-- 0.50, -- Mortal Cleave / High Priestess Thekal / Zul'Gurub
---	[GetSpellInfo(25646)] = true, -- 0.10, -- Mortal Wound / Bonechewer Spectator / Black Temple / stacks to 10
---	[GetSpellInfo(25646)] = true, -- 0.10, -- Mortal Wound / Fankriss the Unyielding / Temple of Ahn'Qiraj / stacks to 10
-	[GetSpellInfo(54378)] = true, -- 0.10, -- Mortal Wound / Gluth / Naxxramas / stacks to 10
---	[GetSpellInfo(25646)] = true, -- 0.10, -- Mortal Wound / Kurinnaxx / Ruins of Ahn'Qiraj / stacks to 10
---	[GetSpellInfo(28467)] = true, -- 0.10, -- Mortal Wound / Unstoppable Abomination / Naxxramas
---	[GetSpellInfo(25646)] = true,	-- 0.10, -- Mortal Wound / Temporus / The Black Morass / stacks to 7
---	[GetSpellInfo(36814)] = true,	-- 0.10, -- Mortal Wound / Watchkeeper Gargolmar / Hellfire Ramparts (Heroic) / stacks to 8
---	[GetSpellInfo(30641)] = true,	-- 0.10, -- Mortal Wound / Watchkeeper Gargolmar / Hellfire Ramparts / stacks to 8
---	[GetSpellInfo(54121)] = true,	-- 0.75, -- Necrotic Poison / Maexxna / Naxxramas
-	[GetSpellInfo(28776)] = true,	-- 0.90, -- Necrotic Poison / Maexxna / Naxxramas (Heroic)
-	[GetSpellInfo(60626)] = true, -- 0.10, -- Necrotic Strike / Undying Minion / Icecrown / stacks to 10
-	[GetSpellInfo(30423)] = true,	-- 0.01, -- Nether Portal / Dominance / Netherspite / Karazhan / stacks to 99
-	[GetSpellInfo(59525)] = true, -- 0.15, -- Ray of Pain / Moragg / The Violet Hold
-	[GetSpellInfo(45885)] = true, -- 0.50, -- Shadow Spike / Kil'jaeden / Sunwell Plateau
-	[GetSpellInfo(54525)] = true, -- 0.20, -- Shroud of Darkness / Zuramat the Obliterator / The Violet Hold / stacks to 5
-	[GetSpellInfo(35189)] = true,	-- 0.50, -- Solar Strike / Bloodwarder Slayer / The Mechanar
-	[GetSpellInfo(32315)] = true,	-- 0.50, -- Soul Strike / Ethereal Crypt Raider / Mana-Tombs
---	[GetSpellInfo(53803)] = true,	-- 0.50, -- Veil of Shadow / Dread Creeper / Naxxramas
-	[GetSpellInfo(28440)] = true,	-- 0.75, -- Veil of Shadow / Dread Creeper / Naxxramas (Heroic)
---	[GetSpellInfo(7068)]  = true,	-- 0.75, -- Veil of Shadow / Nefarian / Blackwing Lair
-	[GetSpellInfo(44534)] = true,	-- 0.50, -- Wretched Strike / Wretched Bruiser / Magisters' Terrace
+	[GetSpellName(19434)] = true,	-- Aimed Shot
+	[GetSpellName(40599)] = true,	-- Arcing Smash
+	[GetSpellName(23169)] = true,	-- Brood Affliction: Green
+	[GetSpellName(43410)] = true, -- Chop
+	[GetSpellName(34073)] = true,	-- Curse of the Bleeding Hollow
+	[GetSpellName(13583)] = true,	-- Curse of the Deadwood
+	[GetSpellName(45347)] = true,	-- Dark Touched
+	[GetSpellName(63038)] = true, -- Dark Volley
+	[GetSpellName(36023)] = true,	-- Deathblow
+	[GetSpellName(34625)] = true,	-- Demolish
+	[GetSpellName(34366)] = true,	-- Ebon Poison
+	[GetSpellName(48291)] = true, -- Fetid Rot
+	[GetSpellName(32378)] = true,	-- Filet
+	[GetSpellName(56112)] = true, -- Furious Attacks
+	[GetSpellName(19716)] = true,	-- Gehennas' Curse
+	[GetSpellName(52645)] = true, -- Hex of Weakness
+	[GetSpellName(36917)] = true,	-- Magma-Thrower's Curse
+	[GetSpellName(48301)] = true, -- Mind Trauma
+	[GetSpellName(22859)] = true,	-- Mortal Cleave
+	[GetSpellName(12294)] = true,	-- Mortal Strike
+	[GetSpellName(54378)] = true, -- Mortal Wound
+	[GetSpellName(69674)] = true, -- Mutated Infection
+	[GetSpellName(28776)] = true,	-- Necrotic Poison
+	[GetSpellName(60626)] = true, -- Necrotic Strike
+	[GetSpellName(30423)] = true,	-- Nether Portal - Dominance
+	[GetSpellName(68391)] = true, -- Permafrost
+	[GetSpellName(59525)] = true, -- Ray of Pain
+	[GetSpellName(45885)] = true, -- Shadow Spike
+	[GetSpellName(54525)] = true, -- Shroud of Darkness
+	[GetSpellName(35189)] = true,	-- Solar Strike
+	[GetSpellName(32315)] = true,	-- Soul Strike
+	[GetSpellName(70588)] = true, -- Suppression
+	[GetSpellName(32858)] = true,	-- Touch of the Forgotten
+	[GetSpellName(28440)] = true,	-- Veil of Shadow
+	[GetSpellName(13218)] = true,	-- Wound Poison
+	[GetSpellName(13222)] = true,	-- Wound Poison II
+	[GetSpellName(13223)] = true,	-- Wound Poison III
+	[GetSpellName(13224)] = true,	-- Wound Poison IV
+	[GetSpellName(27189)] = true,	-- Wound Poison V
+	[GetSpellName(57974)] = true,	-- Wound Poison VI
+	[GetSpellName(57975)] = true,	-- Wound Poison VII
+	[GetSpellName(52771)] = true,	-- Wounding Strike
+	[GetSpellName(44534)] = true,	-- Wretched Strike
 }
 
 -- Debuffs which prevent healing received
 local debuffs_prevented = {
-	[GetSpellInfo(41292)] = true, -- Aura of Suffering / Essence of Suffering / Black Temple
-	[GetSpellInfo(45996)] = true, -- Darkness / M'uru / Sunwell Plateau
-	[GetSpellInfo(30843)] = true, -- Enfeeble / Prince Malchezaar / Karazhan
-	[GetSpellInfo(55593)] = true, -- Necrotic Aura / Loatheb / Naxxramas
+	[GetSpellName(41292)] = true, -- Aura of Suffering
+	[GetSpellName(45996)] = true, -- Darkness
+	[GetSpellName(59513)] = true, -- Embrace of the Vampyr
+	[GetSpellName(30843)] = true, -- Enfeeble
+	[GetSpellName(55593)] = true, -- Necrotic Aura
 }
 
 ------------------------------------------------------------------------
