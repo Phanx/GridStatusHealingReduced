@@ -41,82 +41,75 @@ end
 
 ------------------------------------------------------------------------
 
+local function GetSpellName(id)
+	local name = GetSpellInfo(id)
+	return name or ""
+end
+
 -- Debuffs which reduce healing received
 local debuffs_reduced = {
-	19434, -- Aimed Shot
-	40599, -- Arcing Smash
-	23169, -- Brood Affliction: Green
-	43410, -- Chop
-	34073, -- Curse of the Bleeding Hollow
-	13583, -- Curse of the Deadwood
-	45347, -- Dark Touched
-	63038, -- Dark Volley
-	36023, -- Deathblow
-	34625, -- Demolish
-	34366, -- Ebon Poison
-	48291, -- Fetid Rot
-	32378, -- Filet
-	56112, -- Furious Attacks
-	19716, -- Gehennas' Curse
-	52645, -- Hex of Weakness
-	36917, -- Magma-Thrower's Curse
-	48301, -- Mind Trauma
-	22859, -- Mortal Cleave
-	12294, -- Mortal Strike (warrior)
-	24573, -- Mortal Strike (Broodlord Lashlayer)
-	43441, -- Mortal Strike (Hex Lord Malacrass)
-	44268, -- Mortal Strike (Warlord Salaris)
-	25646, -- Mortal Wound
-	31464, -- Mortal Wound
-	36814, -- Mortal Wound
-	54378, -- Mortal Wound
-	69674, -- Mutated Infection
-	28776, -- Necrotic Poison
-	60626, -- Necrotic Strike
-	30423, -- Nether Portal - Dominance
-	68391, -- Permafrost
-	59525, -- Ray of Pain
-	45885, -- Shadow Spike
-	54525, -- Shroud of Darkness
-	35189, -- Solar Strike
-	32315, -- Soul Strike
-	70588, -- Suppression
-	32858, -- Touch of the Forgotten
-	7068,  -- Veil of Shadow (Nefarian)
-	28440, -- Veil of Shadow (Dread Creeper)
-	69633, -- Veil of Shadow (Spectral Warden)
-	13218, -- Wound Poison (rogue)
-	43461, -- Wound Poison (Hex Lord Malacrass)
-	13222, -- Wound Poison II
-	13223, -- Wound Poison III
-	13224, -- Wound Poison IV
-	27189, -- Wound Poison V
-	57974, -- Wound Poison VI
-	57975, -- Wound Poison VII
-	52771, -- Wounding Strike
-	44534, -- Wretched Strike
+	[GetSpellName(19434)] = true, -- Aimed Shot
+	[GetSpellName(40599)] = true, -- Arcing Smash
+	[GetSpellName(23169)] = true, -- Brood Affliction: Green
+	[GetSpellName(43410)] = true, -- Chop
+	[GetSpellName(34073)] = true, -- Curse of the Bleeding Hollow
+	[GetSpellName(13583)] = true, -- Curse of the Deadwood
+	[GetSpellName(45347)] = true, -- Dark Touched
+	[GetSpellName(63038)] = true, -- Dark Volley
+	[GetSpellName(36023)] = true, -- Deathblow
+	[GetSpellName(34625)] = true, -- Demolish
+	[GetSpellName(34366)] = true, -- Ebon Poison
+	[GetSpellName(48291)] = true, -- Fetid Rot
+	[GetSpellName(32378)] = true, -- Filet
+	[GetSpellName(56112)] = true, -- Furious Attacks
+	[GetSpellName(19716)] = true, -- Gehennas' Curse
+	[GetSpellName(52645)] = true, -- Hex of Weakness
+	[GetSpellName(36917)] = true, -- Magma-Thrower's Curse
+	[GetSpellName(48301)] = true, -- Mind Trauma
+	[GetSpellName(22859)] = true, -- Mortal Cleave
+	[GetSpellName(12294)] = true, -- Mortal Strike (warrior)
+	[GetSpellName(24573)] = true, -- Mortal Strike (Broodlord Lashlayer)
+	[GetSpellName(43441)] = true, -- Mortal Strike (Hex Lord Malacrass)
+	[GetSpellName(44268)] = true, -- Mortal Strike (Warlord Salaris)
+	[GetSpellName(25646)] = true, -- Mortal Wound
+	[GetSpellName(31464)] = true, -- Mortal Wound
+	[GetSpellName(36814)] = true, -- Mortal Wound
+	[GetSpellName(54378)] = true, -- Mortal Wound
+	[GetSpellName(69674)] = true, -- Mutated Infection
+	[GetSpellName(28776)] = true, -- Necrotic Poison
+	[GetSpellName(60626)] = true, -- Necrotic Strike
+	[GetSpellName(30423)] = true, -- Nether Portal - Dominance
+	[GetSpellName(68391)] = true, -- Permafrost
+	[GetSpellName(59525)] = true, -- Ray of Pain
+	[GetSpellName(45885)] = true, -- Shadow Spike
+	[GetSpellName(54525)] = true, -- Shroud of Darkness
+	[GetSpellName(35189)] = true, -- Solar Strike
+	[GetSpellName(32315)] = true, -- Soul Strike
+	[GetSpellName(70588)] = true, -- Suppression
+	[GetSpellName(32858)] = true, -- Touch of the Forgotten
+	[GetSpellName(7068)]  = true, -- Veil of Shadow (Nefarian)
+	[GetSpellName(28440)] = true, -- Veil of Shadow (Dread Creeper)
+	[GetSpellName(69633)] = true, -- Veil of Shadow (Spectral Warden)
+	[GetSpellName(13218)] = true, -- Wound Poison (rogue)
+	[GetSpellName(43461)] = true, -- Wound Poison (Hex Lord Malacrass)
+	[GetSpellName(13222)] = true, -- Wound Poison II
+	[GetSpellName(13223)] = true, -- Wound Poison III
+	[GetSpellName(13224)] = true, -- Wound Poison IV
+	[GetSpellName(27189)] = true, -- Wound Poison V
+	[GetSpellName(57974)] = true, -- Wound Poison VI
+	[GetSpellName(57975)] = true, -- Wound Poison VII
+	[GetSpellName(52771)] = true, -- Wounding Strike
+	[GetSpellName(44534)] = true, -- Wretched Strike
 }
-for _, id in ipairs(debuffs_reduced) do
-	local name = GetSpellInfo(spellID)
-	if name and not debuffs_reduced[name] then
-		debuffs_reduced[name] = true
-	end
-end
 
 -- Debuffs which prevent healing received
 local debuffs_prevented = {
-	41292, -- Aura of Suffering
-	45996, -- Darkness
-	59513, -- Embrace of the Vampyr
-	30843, -- Enfeeble
-	55593, -- Necrotic Aura
+	[GetSpellName(41292)] = true, -- Aura of Suffering
+	[GetSpellName(45996)] = true, -- Darkness
+	[GetSpellName(59513)] = true, -- Embrace of the Vampyr
+	[GetSpellName(30843)] = true, -- Enfeeble
+	[GetSpellName(55593)] = true, -- Necrotic Aura
 }
-for _, id in ipairs(debuffs_prevented) do
-	local name = GetSpellInfo(spellID)
-	if name and not debuffs_prevented[name] then
-		debuffs_prevented[name] = true
-	end
-end
 
 ------------------------------------------------------------------------
 
