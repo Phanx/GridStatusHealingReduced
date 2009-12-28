@@ -113,7 +113,7 @@ local debuffs_prevented = {
 
 ------------------------------------------------------------------------
 
-local GridStatusHealingReduced = GridStatus:NewModule("GridStatusHealingReduced")
+local GridStatusHealingReduced = Grid:GetModule("GridStatus"):NewModule("GridStatusHealingReduced")
 
 local GetNumRaidMembers = GetNumRaidMembers
 local UnitDebuff = UnitDebuff
