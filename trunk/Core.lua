@@ -47,7 +47,7 @@ local function GetSpellName(id)
 end
 
 -- Debuffs which reduce healing received
-local debuffs_reduced = {
+local ReductionDebuffs = {
 	[GetSpellName(19434)] = true, -- Aimed Shot
 	[GetSpellName(40599)] = true, -- Arcing Smash
 	[GetSpellName(23169)] = true, -- Brood Affliction: Green
@@ -103,7 +103,7 @@ local debuffs_reduced = {
 }
 
 -- Debuffs which prevent healing received
-local debuffs_prevented = {
+local PreventionDebuffs = {
 	[GetSpellName(41292)] = true, -- Aura of Suffering
 	[GetSpellName(45996)] = true, -- Darkness
 	[GetSpellName(59513)] = true, -- Embrace of the Vampyr
@@ -115,15 +115,24 @@ local debuffs_prevented = {
 
 local GridStatusHealingReduced = Grid:GetModule("GridStatus"):NewModule("GridStatusHealingReduced")
 
-local GetNumRaidMembers = GetNumRaidMembers
 local UnitDebuff = UnitDebuff
 local UnitGUID = UnitGUID
 
-local party_units, raid_units, valid_units, enabled, db = { }, { }, { }, 0
+local enabled = 0
 
 local function debug(str)
 	print("|cffff7f7fGridStatusHealingReduced:|r " .. str)
 end
+
+local ignore = setmetatable({ }, { __index = function(t, unit)
+	if unit == "player" or unit == "pet" or unit:match("^partyp?e?t?%d+$") or unit:match("^raidp?e?t?%d+$") then
+		t[unit] = false
+		return false
+	else
+		t[unit] = true
+		return true
+	end
+end })
 
 GridStatusHealingReduced.options = false
 GridStatusHealingReduced.defaultDB = {
@@ -149,23 +158,8 @@ function GridStatusHealingReduced:OnInitialize()
 --	debug("OnInitialize")
 
 	self.super.OnInitialize(self)
-
 	self:RegisterStatus("alert_healingReduced", L["Healing reduced"], nil, true)
 	self:RegisterStatus("alert_healingPrevented", L["Healing prevented"], nil, true)
-
-	db = self.db.profile
-
-	for i = 1, 40 do
-		raid_units["raid"..i] = true
-		raid_units["raidpet"..i] = true
-	end
-
-	party_units["player"] = true
-	party_units["pet"] = true
-	for i = 1, 4 do
-		party_units["party"..i] = true
-		party_units["partypet"..i] = true
-	end
 end
 
 function GridStatusHealingReduced:OnEnable()
@@ -178,13 +172,7 @@ function GridStatusHealingReduced:OnStatusEnable(status)
 --	debug("OnStatusEnable, " .. status)
 
 	enabled = enabled + 1
-
-	self:RegisterEvent("RAID_ROSTER_UPDATE")
-	self:RegisterEvent("PARTY_MEMBERS_CHANGED", "RAID_ROSTER_UPDATE")
 	self:RegisterEvent("UNIT_AURA", "UpdateUnit")
-
-	self:RAID_ROSTER_UPDATE()
-
 	self:UpdateAllUnits()
 end
 
@@ -192,13 +180,9 @@ function GridStatusHealingReduced:OnStatusDisable(status)
 --	debug("OnStatusDisable, " .. status)
 
 	enabled = enabled - 1
-
 	if enabled == 0 then
 		self:UnregisterEvent("UNIT_AURA")
-		self:UnregisterEvent("RAID_ROSTER_UPDATE")
-		self:UnregisterEvent("PARTY_MEMBERS_CHANGED")
 	end
-
 	self.core:SendStatusLostAllUnits(status)
 end
 
@@ -206,37 +190,39 @@ end
 
 function GridStatusHealingReduced:UpdateAllUnits()
 	if enabled > 0 then
-		for guid, unitid in GridRoster:IterateRoster() do
+		for guid, unitid in Grid:GetModule("GridRoster"):IterateRoster() do
 			self:UpdateUnit(unitid)
 		end
 	end
 end
 
 function GridStatusHealingReduced:UpdateUnit(unit)
-	if not valid_units[unit] then return end
+	if ignore[unit] then return end
 --	debug("UNIT_AURA, " .. unit)
-	local settings, name, icon, count, duration, expirationTime, _
 
-	local prevented, reduced = false, false
-	for i = 1, 40 do
+	local i = 1
+	local prevented, reduced
+	local settings, name, icon, count, duration, expirationTime, _
+	while true do
 		name, _, icon, count, _, duration, expirationTime = UnitDebuff(unit, i)
 		if not name then
 			break
 		end
 		if duration then
-			if debuffs_prevented[name] then
+			if PreventionDebuffs[name] then
 				prevented = true
 				reduced = false
 				break
-			elseif not reduced and debuffs_reduced[name] then
+			elseif not reduced and ReductionDebuffs[name] then
 				reduced = true
 			end
 		end
+		i = i + 1
 	end
 
 	if prevented then
 	--	debug("SendStatusGained")
-		settings = db.alert_healingPrevented
+		settings = self.db.profile.alert_healingPrevented
 		self.core:SendStatusGained(UnitGUID(unit), "alert_healingPrevented", settings.priority, (settings.range and 40), settings.color, settings.text, nil, nil, icon, expirationTime and (expirationTime - duration), count)
 	else
 	--	debug("SendStatusLost")
@@ -245,25 +231,11 @@ function GridStatusHealingReduced:UpdateUnit(unit)
 
 	if reduced then
 	--	debug("SendStatusGained")
-		settings = db.alert_healingReduced
+		settings = self.db.profile.alert_healingReduced
 		self.core:SendStatusGained(UnitGUID(unit), "alert_healingReduced", settings.priority, (settings.range and 40), settings.color, settings.text, nil, nil, icon, expirationTime and (expirationTime - duration), count)
 	else
 	--	debug("SendStatusLost")
 		self.core:SendStatusLost(UnitGUID(unit), "alert_healingReduced")
-	end
-end
-
-------------------------------------------------------------------------
-
-function GridStatusHealingReduced:RAID_ROSTER_UPDATE()
---	debug("RAID_ROSTER_UPDATE")
-
-	if GetNumRaidMembers() > 0 then
-	--	debug("In raid")
-		valid_units = raid_units
-	else
-	--	debug("Not in raid")
-		valid_units = party_units
 	end
 end
 
