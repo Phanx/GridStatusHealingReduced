@@ -8,35 +8,32 @@
 	http://wow.curse.com/downloads/wow-addons/details/gridstatushealingreduced.aspx
 ----------------------------------------------------------------------]]
 
-local L = {}
-do
-	local locale = GetLocale()
-	if locale == "deDE" then
-		L["Healing reduced"] = "Heilung reduziert"
-		L["Healing prevented"] = "Heilung verhindert"
-	elseif locale == "esES" or locale == "esMX" then
-		L["Healing reduced"] = "Sanación reducida"
-		L["Healing prevented"] = "Sanación impedida"
-	elseif locale == "frFR" then
-		L["Healing reduced"] = "Soins diminués"
-		L["Healing prevented"] = "Soins empêché"
-	elseif locale == "ruRU" then
-		L["Healing reduced"] = "Исцеление уменьшено"
-		L["Healing prevented"] = "Препятствие исцелению"
-	elseif locale == "koKR" then
-		L["Healing reduced"] = "치유량 감소"
-		L["Healing prevented"] = "치유량 방해"
-	elseif locale == "zhCN" then
-		L["Healing reduced"] = "治疗效果被降低"
-		L["Healing prevented"] = "治疗无效果"
-	elseif locale == "zhTW" then
-		L["Healing reduced"] = "治療效果被降低"
-		L["Healing prevented"] = "治療無效果"
-	end
-	setmetatable(L, { __index = function(t, k)
-		t[k] = k
-		return k
-	end })
+local HEALING_REDUCED = "Healing reduced"
+local HEALING_PREVENTED = "Healing prevented"
+
+local LOCALE = GetLocale()
+
+if LOCALE == "deDE" then
+	HEALING_REDUCED = "Heilung reduziert"
+	HEALING_PREVENTED = "Heilung verhindert"
+elseif LOCALE == "esES" or LOCALE == "esMX" then
+	HEALING_REDUCED = "Sanación reducida"
+	HEALING_PREVENTED = "Sanación impedida"
+elseif LOCALE == "frFR" then
+	HEALING_REDUCED = "Soins diminués"
+	HEALING_PREVENTED = "Soins empêché"
+elseif LOCALE == "ruRU" then
+	HEALING_REDUCED = "Исцеление уменьшено"
+	HEALING_PREVENTED = "Препятствие исцелению"
+elseif LOCALE == "koKR" then
+	HEALING_REDUCED = "치유량 감소"
+	HEALING_PREVENTED = "치유량 방해"
+elseif LOCALE == "zhCN" then
+	HEALING_REDUCED = "治疗效果被降低"
+	HEALING_PREVENTED = "治疗无效果"
+elseif LOCALE == "zhTW" then
+	HEALING_REDUCED = "治療效果被降低"
+	HEALING_PREVENTED = "治療無效果"
 end
 
 ------------------------------------------------------------------------
@@ -114,42 +111,43 @@ local PreventionDebuffs = {
 
 ------------------------------------------------------------------------
 
-local GridStatusHealingReduced = Grid:GetModule("GridStatus"):NewModule("GridStatusHealingReduced")
-
 local UnitDebuff = UnitDebuff
 local UnitGUID = UnitGUID
 
 local enabled = 0
 
 local function debug(str)
-	print("|cffff7f7fGridStatusHealingReduced:|r " .. str)
+	print("|cffff9933GridStatusHealingReduced:|r " .. str)
 end
 
-local ignore = setmetatable({ }, { __index = function(t, unit)
-	if unit == "player" or unit == "pet" or unit:match("^partyp?e?t?%d+$") or unit:match("^raidp?e?t?%d+$") then
-		t[unit] = false
-		return false
-	else
-		t[unit] = true
-		return true
-	end
-end })
+local valid = { player = true, pet = true, vehicle = true }
+for i = 1, 5 do
+	valid["party" .. i] = true
+	valid["partypet" .. i] = true
+end
+for i = 1, 40 do
+	valid["raid" .. i] = true
+	valid["raidpet" .. i] = true
+end
+
+local GridStatusHealingReduced = Grid:GetModule("GridStatus"):NewModule("GridStatusHealingReduced")
 
 GridStatusHealingReduced.options = false
+
 GridStatusHealingReduced.defaultDB = {
 	alert_healingReduced = {
-		text = L["Healing reduced"],
 		enable = true,
 		color = { r = 0.8, g = 0.4, b = 0.8, a = 1 },
 		priority = 90,
 		range = false,
+		text = "H-",
 	},
 	alert_healingPrevented = {
-		text = L["Healing prevented"],
 		enable = true,
 		color = { r = 0.6, g = 0.2, b = 0.6, a = 1 },
 		priority = 99,
 		range = false,
+		text = "Hx",
 	}
 }
 
@@ -157,15 +155,14 @@ GridStatusHealingReduced.defaultDB = {
 
 function GridStatusHealingReduced:OnInitialize()
 --	debug("OnInitialize")
-
 	self.super.OnInitialize(self)
-	self:RegisterStatus("alert_healingReduced", L["Healing reduced"], nil, true)
-	self:RegisterStatus("alert_healingPrevented", L["Healing prevented"], nil, true)
+
+	self:RegisterStatus("alert_healingReduced", HEALING_REDUCED, nil, true)
+	self:RegisterStatus("alert_healingPrevented", HEALING_PREVENTED, nil, true)
 end
 
 function GridStatusHealingReduced:OnEnable()
 --	debug("OnEnable")
-
 	self.super.OnEnable(self)
 end
 
@@ -192,13 +189,13 @@ end
 function GridStatusHealingReduced:UpdateAllUnits()
 	if enabled > 0 then
 		for guid, unitid in Grid:GetModule("GridRoster"):IterateRoster() do
-			self:UpdateUnit(unitid)
+			self:UpdateUnit("UpdateAllUnits", unitid)
 		end
 	end
 end
 
-function GridStatusHealingReduced:UpdateUnit(unit)
-	if ignore[unit] then return end
+function GridStatusHealingReduced:UpdateUnit(event, unit)
+	if not valid[unit] then return end
 --	debug("UNIT_AURA, " .. unit)
 
 	local i = 1
