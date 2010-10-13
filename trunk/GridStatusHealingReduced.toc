@@ -1,5 +1,5 @@
 ﻿## Interface: 40000
-## Version: 4.0.0.wowi:revision
+## Version: 4.0.1.wowi:revision
 
 ## Title: GridStatus Healing Reduced
 ## Notes: Adds a status indicator to Grid for debuffs which reduce the effectiveness of healing spells.
