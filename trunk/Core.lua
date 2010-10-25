@@ -89,21 +89,22 @@ function GridStatusHealingReduced:OnInitialize()
 --	debug("OnInitialize")
 	self.super.OnInitialize(self)
 
-	ReductionDebuffs = { }
-	for id in string.split(",", "48871,59243,65883,67977,67978,67979,63038,48291,56112,70671,70710,30213,48301,12294,13737,16856,32736,35054,39171,57789,65926,67542,68782,68783,68784,71552,28467,48187,59265,54378,71127,69674,28776,68391,59525,54525,32315,70588,28440,53803,69633,82654,13218,13222,13223,13224,27189,57974,57975,52771") do
-		local name = GetSpellInfo(id)
-		if name then
-			ReductionDebuffs[id] = true
+	local function maketable(...)
+		local t = { }
+		for i = 1, select("#", ...) do
+			local id = select(i, ...)
+			id = id and tonumber(id) or 0
+
+			local name = GetSpellInfo(id)
+			if name then
+				t[id] = true
+			end
 		end
+		return t
 	end
 
-	PreventionDebuffs = { }
-	for id in string.split(",", "59513,55593") do
-		local name = GetSpellInfo(id)
-		if name then
-			PreventionDebuffs[id] = true
-		end
-	end
+	ReductionDebuffs  = maketable(string.split(",", "48871,59243,65883,67977,67978,67979,63038,48291,56112,70671,70710,30213,48301,54680,12294,13737,16856,32736,35054,39171,57789,65926,67542,68782,68783,68784,71552,28467,48187,59265,54378,71127,69674,28776,68391,59525,54525,32315,70588,28440,53803,69633,82654,13218,13222,13223,13224,27189,57974,57975,52771"))
+	PreventionDebuffs = maketable(string.split(",", "59513,55593"))
 
 	self:RegisterStatus("alert_healingReduced", HEALING_REDUCED, nil, true)
 	self:RegisterStatus("alert_healingPrevented", HEALING_PREVENTED, nil, true)
