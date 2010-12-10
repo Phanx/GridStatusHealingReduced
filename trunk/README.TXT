@@ -1,4 +1,3 @@
-
 GridStatusHealingReduced - a World of Warcraft user interface addon
 
 	by Phanx < addons@phanx.net >
@@ -48,24 +47,9 @@ Feedback
 
 License
 
-	Copyright © 2008–2010 Phanx.
+	Copyright © 2008–2010 Phanx
 
-	The contents of this addon, excluding third-party resources, are
-	copyrighted to its author with all rights reserved, under United
-	States copyright law and various international treaties.
-
-	In particular, please note that you may not distribute this addon in
-	any form, with or without modifications, including as part of a
-	compilation, without prior written permission from its author.
-
-	The author of this addon hereby grants you the following rights:
-
-	1. You may make modifications to this addon for private use only.
-
-	2. You may use source code from this addon for any purpose, provided
-	that the names of this addon and its author are not used to promote
-	your project, and do not appear in the title, source code, or file
-	names of your project, outside of an optional credits notation.
-
-	All rights not explicitly addressed in this license are reserved by
-	the copyright holder.
+	I, the copyright holder of this work, hereby release it into the public
+	domain. This applies worldwide. In case this is not legally possible:
+	I grant anyone the right to use this work for any purpose, without any
+	conditions, unless such conditions are required by law.
