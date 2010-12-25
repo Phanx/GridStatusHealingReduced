@@ -152,7 +152,7 @@ function GridStatusHealingReduced:UpdateUnit(event, unit)
 
 	local prevented, reduced, name, icon, count, duration, expiration, id, _
 	for i = 1, 100 do
-		name, _, icon, count, _, duration, expirationTime, _, _, _, id = UnitDebuff(unit, i)
+		name, _, icon, count, _, duration, expiration, _, _, _, id = UnitDebuff(unit, i)
 		if not id then
 			break
 		end
