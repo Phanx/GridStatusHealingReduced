@@ -1,8 +1,9 @@
 --[[--------------------------------------------------------------------
 	GridStatusHealingReduced
-	Adds aggregate statuses to Grid for debuffs which reduce or prevent healing received.
-	by Phanx < addons@phanx.net >
-	Copyright © 2008–2010 Phanx. Some rights reserved. See LICENSE.txt for details.
+	Adds generic statuses to Grid for debuffs which reduce or prevent healing received.
+	Written by Phanx <addons@phanx.net>
+	Maintained by Akkorian <akkorian@hotmail.com>
+	Copyright © 2008–2011 Phanx. Some rights reserved. See LICENSE.txt for details.
 	http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 	http://wow.curse.com/downloads/wow-addons/details/gridstatushealingreduced.aspx
 ----------------------------------------------------------------------]]
