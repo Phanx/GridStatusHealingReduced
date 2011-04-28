@@ -1,5 +1,5 @@
-﻿## Interface: 40000
-## Version: 4.0.3.wowi:revision
+﻿## Interface: 40100
+## Version: 4.1.0.wowi:revision
 
 ## Title: GridStatus Healing Reduced
 ## Notes: Adds generic statuses to Grid for debuffs which reduce or prevent healing received.
