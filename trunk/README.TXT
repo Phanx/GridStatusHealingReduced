@@ -2,7 +2,6 @@ GridStatusHealingReduced
 ========================
 
 * Written by Phanx <addons@phanx.net>
-* Maintained by Akkorian <akkorian@hotmail.com>
 * Copyright © 2008–2011 Phanx. Some rights reserved. See LICENSE.txt for details.
 * http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 * http://wow.curse.com/downloads/wow-addons/details/gridstatushealingreduced.aspx
@@ -55,4 +54,4 @@ request features. Use the comment system only for general questions
 or comments.
 
 If you need to contact me privately, you may do by private message
-on either download site, or by email at <akkorian@hotmail.com>.
+on either download site, or by email at <addons@phanx.net>.
