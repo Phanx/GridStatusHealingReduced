@@ -39,19 +39,35 @@ Localization
 ------------
 
 GridStatusHealingReduced is compatible with English, Deutsch, Español,
-Français, Русский, 한국어, 简体中文, and 正體中文 game clients.
+Français, Português, Русский, 한국어, 简体中文, and 正體中文 game clients.
 
 GridStatusHealingReduced is translated into English, Deutsch, Español,
-Français, Русский, 한국어, 简体中文, and 正體中文. If you can provide translations
-for any locale, send me a PM on either download site.
+Français, Português, Русский, 한국어, 简体中文, and 正體中文. If you can
+provide translations for any locale, see the localization page on the
+CurseForge project page:
+
+* http://wow.curseforge.com/addons/gridstatushealingreduced/localization/
 
 
-Feedback
---------
+Bug Reports
+-----------
 
-Please use the ticket system on either download site report bugs or
-request features. Use the comment system only for general questions
-or comments.
+* http://wow.curseforge.com/addons/gridstatushealingreduced/tickets/
+* http://www.wowinterface.com/portal.php?uid=28751&a=listbugs
+
+
+Feature Requests
+----------------
+
+* http://wow.curseforge.com/addons/gridstatushealingreduced/tickets/
+* http://www.wowinterface.com/portal.php?uid=28751&a=listfeatures
+
+
+General Feedback
+----------------
+
+For questions or general feedback, leave a comment on the WoWInterface
+download page. 
 
 If you need to contact me privately, you may do by private message
 on either download site, or by email at <addons@phanx.net>.
