@@ -4,7 +4,7 @@ GridStatusHealingReduced
 * Written by Phanx <addons@phanx.net>
 * Copyright © 2008–2011 Phanx. Some rights reserved. See LICENSE.txt for details.
 * http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
-* http://wow.curse.com/downloads/wow-addons/details/gridstatushealingreduced.aspx
+* http://www.curse.com/addons/wow/gridstatushealingreduced
 
 
 Description
@@ -32,7 +32,7 @@ GridStatusHealingReduced is a plugin for Grid, and does nothing by
 itself. The latest version of Grid can be downloaded from:
 
 * http://www.wowinterface.com/downloads/info5747-Grid.html
-* http://wow.curse.com/downloads/wow-addons/details/grid.aspx
+* http://www.curse.com/addons/wow/grid
 
 
 Localization
