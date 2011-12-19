@@ -5,7 +5,7 @@
 	Maintained by Akkorian <akkorian@hotmail.com>
 	Copyright © 2008–2011 Phanx. Some rights reserved. See LICENSE.txt for details.
 	http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
-	http://wow.curse.com/downloads/wow-addons/details/gridstatushealingreduced.aspx
+	http://www.curse.com/addons/wow/gridstatushealingreduced
 ----------------------------------------------------------------------]]
 
 local GridStatusHealingReduced = Grid:GetModule("GridStatus"):NewModule("GridStatusHealingReduced")
