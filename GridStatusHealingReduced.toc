@@ -1,5 +1,5 @@
 ﻿## Interface: 40300
-## Version: 4.3.0.wowi:revision
+## Version: 4.3.4.wowi:revision
 
 ## Title: GridStatus Healing Reduced
 ## Notes: Grid plugin to show debuffs which reduce or prevent healing received.
