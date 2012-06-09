@@ -2,10 +2,10 @@
 ## Version: 4.3.0.wowi:revision
 
 ## Title: GridStatus Healing Reduced
-## Notes: Adds generic statuses to Grid for debuffs which reduce or prevent healing received.
-## Author: Phanx, Akkorian
+## Notes: Grid plugin to show debuffs which reduce or prevent healing received.
+## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright © 2008–2011 Phanx.
+## X-Copyright: Copyright © 2008–2012 Phanx.
 ## X-License: Some rights reserved. See LICENSE.txt for details.
 ## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN, zhTW
 ## X-Localizations: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN, zhTW

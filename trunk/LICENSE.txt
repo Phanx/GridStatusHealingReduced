@@ -3,7 +3,7 @@ by Phanx <addons@phanx.net>
 http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 http://www.curse.com/addons/wow/gridstatushealingreduced
 
-Copyright © 2008–2011 Phanx
+Copyright © 2008–2012 Phanx
 
 The contents of this software, excluding third-party resources, are
 copyrighted to its author with all rights reserved, under United States
