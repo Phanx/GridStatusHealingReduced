@@ -28,7 +28,7 @@ do
 	elseif GAME_LOCALE == "frFR" then
 		L["Healing reduced"] = "Soins diminués"
 		L["Healing prevented"] = "Soins empêché"
-	elseif GAME_LOCALE == "ptBR" then
+	elseif GAME_LOCALE == "ptBR" or GAME_LOCALE == "ptPT" then
 		L["Healing reduced"] = "Cura reduzida"
 		L["Healing prevented"] = "Cura impedida"
 	elseif GAME_LOCALE == "ruRU" then
@@ -67,13 +67,13 @@ local ReductionDebuffs = {
 	76189,93956,83908,86157,86158,86159,76727,90526,91801,93675,93771,
 	7068,23224,83926,52771,58830,75571,93452,99506,86816,100526,103002,
 	--[[ Cataclysm Solo ]]
-	83930,101340
+	83930,101340,
 	--[[ Players ]]
 	56112,30213,48301,54680,12294,82654,13218,
 	--[[ Unknown ]]
 	23230,95353,34625,95437,38572,39595,61042,29572,31911,40220,43441,
 	95410,54715,54716,59454,59455,36693,46296,68391,60084,68881,24674,
-	30984,36974,39665,43461,54074,65962,109388,110310,91099,99476
+	30984,36974,39665,43461,54074,65962,109388,110310,91099,99476,
 }
 
 local PreventionDebuffs = {
@@ -243,5 +243,3 @@ function GridStatusHealingReduced:UpdateAllUnits()
 		end
 	end
 end
-
-------------------------------------------------------------------------
