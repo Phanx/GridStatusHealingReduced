@@ -1,14 +1,14 @@
-﻿## Interface: 40300
-## Version: 4.3.4.wowi:revision
+﻿## Interface: 50001
+## Version: 5.0.1.wowi:revision
 
-## Title: GridStatus Healing Reduced
+## Title: GridStatusHealingReduced
 ## Notes: Grid plugin to show debuffs which reduce or prevent healing received.
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright © 2008–2012 Phanx.
-## X-License: Some rights reserved. See LICENSE.txt for details.
-## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN, zhTW
-## X-Localizations: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN, zhTW
+## X-Copyright: Copyright (c) 2008-2012 Phanx. All rights reserved.
+## X-License: See accompanying LICENSE file for details.
+## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, itIT, ptBR, ruRU, koKR, zhCN, zhTW
+## X-Localizations: enUS, deDE, esES, esMX, frFR, itIT, ptBR, ruRU, koKR, zhCN, zhTW
 ## X-Website: http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 ## X-Curse-Project-ID: gridstatushealingreduced
 ## X-WoWI-ID: 7364
