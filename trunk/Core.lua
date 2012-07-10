@@ -28,6 +28,9 @@ do
 	elseif GAME_LOCALE == "frFR" then
 		L["Healing reduced"] = "Soins diminués"
 		L["Healing prevented"] = "Soins empêché"
+	elseif GAME_LOCALE == "itIT" then
+		L["Healing reduced"] = "Guarigione ridotti"
+		L["Healing prevented"] = "Guarigione impedito"
 	elseif GAME_LOCALE == "ptBR" or GAME_LOCALE == "ptPT" then
 		L["Healing reduced"] = "Cura reduzida"
 		L["Healing prevented"] = "Cura impedida"
