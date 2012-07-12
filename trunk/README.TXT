@@ -1,8 +1,8 @@
 GridStatusHealingReduced
 ========================
 
-* Written by Phanx <addons@phanx.net>
-* Copyright © 2008–2012 Phanx. Some rights reserved. See LICENSE.txt for details.
+* Copyright (c) 2008-2012 Phanx <addons@phanx.net>. All rights reserved.
+* See the accompanying LICENSE file for license terms.
 * http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 * http://www.curse.com/addons/wow/gridstatushealingreduced
 
@@ -38,36 +38,30 @@ itself. The latest version of Grid can be downloaded from:
 Localization
 ------------
 
-GridStatusHealingReduced is compatible with English, Deutsch, Español,
-Français, Português, Русский, 한국어, 简体中文, and 正體中文 game clients.
+Compatible with English, Deutsch, Español (EU), Español (AL), Français,
+Italiano, Português, Русский, 한국어, 简体中文, and 正體中文 game clients.
 
-GridStatusHealingReduced is translated into English, Deutsch, Español,
-Français, Português, Русский, 한국어, 简体中文, and 正體中文. If you can
-provide translations for any locale, see the localization page on the
-CurseForge project page:
+Translated into English, Deutsch, Español, Italiano, Français, Português,
+Русский, 한국어, 简体中文, and 正體中文.
 
-* http://wow.curseforge.com/addons/gridstatushealingreduced/localization/
+To add or update translations for any language, see the Localization tab
+on the CurseForge project page:
 
-
-Bug Reports
------------
-
-* http://wow.curseforge.com/addons/gridstatushealingreduced/tickets/
-* http://www.wowinterface.com/portal.php?uid=28751&a=listbugs
+http://wow.curseforge.com/addons/gridstatushealingreduced/localization/
 
 
-Feature Requests
-----------------
+Feedback
+--------
 
-* http://wow.curseforge.com/addons/gridstatushealingreduced/tickets/
-* http://www.wowinterface.com/portal.php?uid=28751&a=listfeatures
+Bugs, errors, or other problems:
+	Submit a bug report ticket on either download page.
 
+Feature requests or other suggestions:
+	Submit a feature request ticket system on either download page.
 
-General Feedback
-----------------
+General questions or comments:
+	Post a comment on either download page.
 
-For questions or general feedback, leave a comment on the WoWInterface
-download page.
-
-If you need to contact me privately, you may do by private message
-on either download site, or by email at <addons@phanx.net>.
+If you need to contact me privately for a reason other than those listed
+above, you can send me a private message on either download site, or
+email me at <addons@phanx.net>.
