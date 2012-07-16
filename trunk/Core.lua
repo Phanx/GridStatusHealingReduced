@@ -7,11 +7,11 @@
 	http://www.curse.com/addons/wow/gridstatushealingreduced
 ----------------------------------------------------------------------]]
 
-local GridStatusHealingReduced = Grid:GetModule("GridStatus"):NewModule("GridStatusHealingReduced")
+local GSHR = Grid:GetModule("GridStatus"):NewModule("GridStatusHealingReduced")
 
 ------------------------------------------------------------------------
 
-local L = setmetatable({ }, { __index = function(t, k)
+local L = setmetatable({}, { __index = function(t, k)
 	local v = tostring(k)
 	rawset(t, k, v)
 	return v
@@ -29,8 +29,8 @@ do
 		L["Healing reduced"] = "Soins diminués"
 		L["Healing prevented"] = "Soins empêché"
 	elseif GAME_LOCALE == "itIT" then
-		L["Healing reduced"] = "Guarigione ridotti"
-		L["Healing prevented"] = "Guarigione impedito"
+		L["Healing reduced"] = "Cure ridotti"
+		L["Healing prevented"] = "Cure impedito"
 	elseif GAME_LOCALE == "ptBR" or GAME_LOCALE == "ptPT" then
 		L["Healing reduced"] = "Cura reduzida"
 		L["Healing prevented"] = "Cura impedida"
@@ -75,7 +75,7 @@ end
 
 ------------------------------------------------------------------------
 
-GridStatusHealingReduced.defaultDB = {
+GSHR.defaultDB = {
 	alert_healingReduced = {
 		enable = true,
 		color = { r = 0.8, g = 0.4, b = 0.8, a = 1 },
@@ -94,10 +94,10 @@ GridStatusHealingReduced.defaultDB = {
 
 ------------------------------------------------------------------------
 
-function GridStatusHealingReduced:PostInitialize()
+function GSHR:PostInitialize()
 	self:Debug("PostInitialize")
 
-	local RD, PD = { }, { }
+	local RD, PD = {}, {}
 	for _, id in ipairs(ReductionDebuffs) do
 		local name = GetSpellInfo(id)
 		if name then
@@ -116,7 +116,7 @@ function GridStatusHealingReduced:PostInitialize()
 	self:RegisterStatus("alert_healingPrevented", L["Healing prevented"], nil, true)
 end
 
-function GridStatusHealingReduced:OnStatusEnable(status)
+function GSHR:OnStatusEnable(status)
 	self:Debug("OnStatusEnable", status)
 
 	if status ~= "alert_healingReduced" and status ~= "alert_healingPrevented" then return end
@@ -128,7 +128,7 @@ function GridStatusHealingReduced:OnStatusEnable(status)
 	self:UpdateAllUnits()
 end
 
-function GridStatusHealingReduced:OnStatusDisable(status)
+function GSHR:OnStatusDisable(status)
 	self:Debug("OnStatusDisable", status)
 
 	if status ~= "alert_healingReduced" and status ~= "alert_healingPrevented" then return end
@@ -142,7 +142,7 @@ end
 
 ------------------------------------------------------------------------
 
-function GridStatusHealingReduced:UpdateUnit(event, unit)
+function GSHR:UpdateUnit(event, unit)
 	if not valid[unit] then return end
 	--self:Debug("UpdateUnit", event, unit)
 
@@ -204,7 +204,7 @@ function GridStatusHealingReduced:UpdateUnit(event, unit)
 	end
 end
 
-function GridStatusHealingReduced:UpdateAllUnits()
+function GSHR:UpdateAllUnits()
 	self:Debug("UpdateAllUnits")
 	if enabled > 0 then
 		for guid, unitid in Grid:GetModule("GridRoster"):IterateRoster() do
