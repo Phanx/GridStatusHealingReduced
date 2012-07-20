@@ -3,6 +3,7 @@
 
 ## Title: GridStatusHealingReduced
 ## Notes: Grid plugin to show debuffs which reduce or prevent healing received.
+## Notes-deDE: Zeigt auf Grid die Schwächungszauber, Erhaltene Heileffekte verringern oder verhindern.
 ## Notes-esES: Plugin de Grid para mostrar los perjuicios que reducen o impiden la sanación recibida.
 ## Notes-esMX: Plugin de Grid para mostrar los perjuicios que reducen o impiden la sanación recibida.
 ## Notes-frFR: Plugin di Grid per mostrano le sanzioni che impediscono o riducono le cure ricevute.
