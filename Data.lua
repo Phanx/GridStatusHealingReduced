@@ -120,7 +120,7 @@ ns.ReductionDebuffs = {
 	86816,  -- Giant's Bane (Dragul Giantbutcher in Deepholm)
 
 	--[[ PLAYERS ]]
-	30213,  -- Legion Strike	Warlock Felguard)
+	30213,  -- Legion Strike (Warlock Felguard)
 	54680,  -- Monstrous Bite (Hunter Devilsaur)
 	115625, -- Mortal Cleave (Warlock Wrathguard)
 	115804, -- Mortal Wounds (Warrior)
