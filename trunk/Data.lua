@@ -31,6 +31,7 @@ ns.ReductionDebuffs = {
 	29572,  -- Mortal Strike (Lord Robin Daris in Karazhan)
 	46296,  -- Necrotic Poison (Cataclysm Hound in Sunwell Plateau)
 	30423,  -- Nether Portal - Dominance (Netherspite in Karazhan)
+	45885,  -- Shadow Spike (Kil'jaeden in Sunwell Plateau)
 	39665,  -- Wound Poison (Illidari Boneslicer; Shadowmoon Weapon Master in Black Temple)
 
 	--[[ THE BURNING CRUSADE - PARTY ]]
@@ -107,7 +108,7 @@ ns.ReductionDebuffs = {
 	99506,  -- The Widow's Kiss (Beth'tilac in Firelands)
 	43461,  -- Wound Poison (Hex Lord Malacrass in Zul'Aman)
 
-	--[[ CATACLYSM PARTY ]]
+	--[[ CATACLYSM - PARTY ]]
 	76189,  -- Crepuscular Veil (Shadow of Obsidius in Blackrock Caverns)
 	93956,  -- Cursed Veil (Baron Silverlaine in Shadowfang Keep)
 	91801,  -- Mortal Strike (Wailing Guardsman in Shadowfang Keep)
@@ -116,19 +117,41 @@ ns.ReductionDebuffs = {
 	83926,  -- Veil of Shadow (Vicious Mindlasher in Throne of the Tides)
 	75571,  -- Wounding Strike (Rom'ogg Bonecrusher in Blackrock Caverns)
 
-	--[[ CATACLYSM SOLO ]]
+	--[[ CATACLYSM - SOLO ]]
 	86816,  -- Giant's Bane (Dragul Giantbutcher in Deepholm)
 
+	--[[ MISTS OF PANDARIA - RAID ]]
+	115804, -- Mortal Wounds (Sha of Anger, monk, warrior)
+
+	--[[ MISTS OF PANDARIA - PARTY ]]
+	121910, -- Scurvy (Ookie in Unga Ingoo)
+	110125, -- Shattered Resolve (Minion of Doubt in Templte of the Jade Serpent)
+	119354, -- Sik'thik Strike (Sik'thik Bladedancer in Siege of Niuzao Temple)
+	123655, -- Traumatic Blow (Haiyan the Unstoppable in Mogu'shan Palace)
+
+	--[[ MISTS OF PANDARIA - SOLO ]]
+	118228, -- Aimed Shot (Osul Veteran Archer in Kun-Lai Summit; Wildscale Hunter in Valley of the Four Winds)
+	111826, -- Ancient Poison (Krasari Tormentor in Krasarang Wilds)
+	126195, -- Dirty Mouth (Vicejaw in Vale of Eternal Blossoms)
+	129564, -- Fiery Strike (Bataari Fire-Warrior in Kun-Lai Summit)
+	125353, -- Rank Bite (turtles in Kun-Lai Summit; Townlong Steppes)
+	128964, -- Rune of Suffering (Krasari Runekeeper in Krasarang Wilds)
+
 	--[[ PLAYERS ]]
-	30213,  -- Legion Strike (Warlock Felguard)
-	54680,  -- Monstrous Bite (Hunter Devilsaur)
-	115625, -- Mortal Cleave (Warlock Wrathguard)
-	115804, -- Mortal Wounds (Warrior)
-	82654,  -- Widow Venom (Hunter)
-	8680,   -- Wound Poison (Rogue)
+	30213,  -- Legion Strike (warlock felguard)
+	54680,  -- Monstrous Bite (hunter devilsaur)
+	115625, -- Mortal Cleave (warlock wrathguard)
+	82654,  -- Widow Venom (hunter)
+	8680,   -- Wound Poison (rogue)
 
 	--[[ PVP NPCs ]]
 	76727,  -- Mortal Strike (Twilight Armsmaster in Grim Batol)
+	112055, -- Orb of Power (Power Orb in Temple of Kotmogu)
+	121164, -- Orb of Power (Power Orb in Temple of Kotmogu)
+	121175, -- Orb of Power (Power Orb in Temple of Kotmogu)
+	121176, -- Orb of Power (Power Orb in Temple of Kotmogu)
+	121177, -- Orb of Power (Power Orb in Temple of Kotmogu)
+	127959, -- Orb of Power (Power Orb in Temple of Kotmogu)
 
 	--[[ VARIOUS NPCS ]]
 	78841,  -- Aimed Shot
@@ -151,28 +174,13 @@ ns.ReductionDebuffs = {
 	36974,  -- Wound Poison
 
 	--[[ UNKNOWN ]]
-	118228, -- Aimed Shot
-	126195, -- Dirty Mouth
-	129564, -- Fiery Strike
 	39595,  -- Mortal Cleave
 	61042,  -- Mortal Smash
 	40220,  -- Mortal Strike
 	120436, -- Mortal Strike
-	112055, -- Orb of Power
-	121164, -- Orb of Power
-	121175, -- Orb of Power
-	121176, -- Orb of Power
-	121177, -- Orb of Power
-	127959, -- Orb of Power
 	97857,  -- Phoenix Flame
-	125353, -- Rank Bite
-	128964, -- Rune of Suffering
-	121910, -- Scurvy
-	45885,  -- Shadow Spike
-	119354, -- Sik'thik Strike
 	60084,  -- The Veil of Shadows
 	115195, -- Toxic Shock
-	123655, -- Traumatic Blow
 	68881,  -- Unstable Water Nova
 	24674,  -- Veil of Shadow
 }
@@ -198,6 +206,6 @@ ns.PreventionDebuffs = {
 	101497,  -- Aura of Deth'spair (Deth'tilac in Molten Front)
 	101340,  -- Suffocating Prey (Kirix in Molten Front)
 
-	--[[ UNKNOWN ]]
-	114078,  -- HUGE, SHARP TEETH!
+	--[[ MISTS OF PANDARIA - RAID ]]
+	114078,  -- HUGE, SHARP TEETH! (Darkmoon Rabbit in Darkmoon Island)
 }
