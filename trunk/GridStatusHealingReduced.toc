@@ -1,5 +1,6 @@
 ﻿## Interface: 50100
 ## Version: 5.1.0.wowi:revision
+## Dependencies: Grid
 
 ## Title: GridStatusHealingReduced
 ## Notes: Grid plugin to show debuffs which reduce or prevent healing received.
@@ -9,17 +10,16 @@
 ## Notes-frFR: Plugin di Grid per mostrano le sanzioni che impediscono o riducono le cure ricevute.
 ## Notes-itIT: Plugin di Grid per mostrare le penalità ridurre o prevenire le cure ricevute.
 ## Notes-ptBR: Plugin do Grid para mostrar as penalidades que impedem ou reduzem a cura recebida.
+
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright (c) 2008-2012 Phanx. All rights reserved.
+## X-Copyright: Copyright (c) 2008-2013 Phanx. All rights reserved.
 ## X-License: See accompanying LICENSE file for details.
 ## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, itIT, ptBR, ruRU, koKR, zhCN, zhTW
 ## X-Localizations: enUS, deDE, esES, esMX, frFR, itIT, ptBR, ruRU, koKR, zhCN, zhTW
 ## X-Website: http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 ## X-Curse-Project-ID: gridstatushealingreduced
 ## X-WoWI-ID: 7364
-
-## Dependencies: Grid
 
 Data.lua
 Core.lua
