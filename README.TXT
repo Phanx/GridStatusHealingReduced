@@ -1,14 +1,15 @@
-GridStatusHealingReduced
-========================
 
-* Copyright (c) 2008-2012 Phanx <addons@phanx.net>. All rights reserved.
+GridStatusHealingReduced
+============================
+
+* Copyright (c) 2008-2013 Phanx. All rights reserved.
 * See the accompanying LICENSE file for license terms.
 * http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 * http://www.curse.com/addons/wow/gridstatushealingreduced
 
 
 Description
------------
+---------------
 
 GridStatusHealingReduced adds two statuses to Grid. One activates when
 a unit is affected by any debuff which reduces healing taken. The other
@@ -16,7 +17,7 @@ activates for any debuff which completely prevents healing taken.
 
 
 Usage
------
+---------
 
 The statuses added by GridStatusHealingReduced are called “Healing
 Reduced” and “Healing Prevented”. They are configurable in all the usual
@@ -26,17 +27,18 @@ through the Grid options menu.
 
 
 Dependencies
-------------
+----------------
 
 GridStatusHealingReduced is a plugin for Grid, and does nothing by
-itself. The latest version of Grid can be downloaded from:
+itself. The latest version of Grid can be downloaded from [Curse] [1]
+or [WoWInterface] [2].
 
-* http://www.wowinterface.com/downloads/info5747-Grid.html
-* http://www.curse.com/addons/wow/grid
+	[1]: http://www.curse.com/addons/wow/grid
+	[2]: http://www.wowinterface.com/downloads/info5747-Grid.html
 
 
 Localization
-------------
+----------------
 
 Compatible with English, Deutsch, Español (EU), Español (AL), Français,
 Italiano, Português, Русский, 한국어, 简体中文, and 繁體中文 game clients.
@@ -44,24 +46,20 @@ Italiano, Português, Русский, 한국어, 简体中文, and 繁體中文 
 Translated into English, Deutsch, Español, Italiano, Français, Português,
 Русский, 한국어, 简体中文, and 繁體中文.
 
-To add or update translations for any language, see the Localization tab
-on the CurseForge project page:
+To add or update translations, visit the [WowAce project page] [3].
 
-http://wow.curseforge.com/addons/gridstatushealingreduced/localization/
+	[3]: http://wow.curseforge.com/addons/gridstatushealingreduced/localization/
 
 
 Feedback
---------
+------------
 
-Bugs, errors, or other problems:
-	Submit a bug report ticket on either download page.
+Please use the links on either download page to report bugs, suggest new
+features, ask questions, or post comments.
 
-Feature requests or other suggestions:
-	Submit a feature request ticket system on either download page.
-
-General questions or comments:
-	Post a comment on either download page.
-
-If you need to contact me privately for a reason other than those listed
-above, you can send me a private message on either download site, or
-email me at <addons@phanx.net>.
+If you need to contact me privately for some other reason, you can email
+me at <addons@phanx.net> or send a private message to Phanx on either
+download site. Please note that I do not provide private support or
+tutoring of any kind, and will not respond to emails or PMs asking for
+help with addons, reporting bugs, or suggesting features. Use the links
+on the download page instead!
