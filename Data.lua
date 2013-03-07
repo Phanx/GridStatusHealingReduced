@@ -121,13 +121,16 @@ ns.ReductionDebuffs = {
 	86816,  -- Giant's Bane (Dragul Giantbutcher in Deepholm)
 
 	--[[ MISTS OF PANDARIA - RAID ]]
+	126901, -- Mortal Rend (Kor'thik Fleshrender in Heart of Fear)
 	115804, -- Mortal Wounds (Sha of Anger, monk, warrior)
 
 	--[[ MISTS OF PANDARIA - PARTY ]]
+	133001, -- Gas Bomb (Rak'gor Bloodrazor in Dagger in the Dark)
 	121910, -- Scurvy (Ookie in Unga Ingoo)
 	110125, -- Shattered Resolve (Minion of Doubt in Templte of the Jade Serpent)
 	119354, -- Sik'thik Strike (Sik'thik Bladedancer in Siege of Niuzao Temple)
 	123655, -- Traumatic Blow (Haiyan the Unstoppable in Mogu'shan Palace)
+
 
 	--[[ MISTS OF PANDARIA - SOLO ]]
 	118228, -- Aimed Shot (Osul Veteran Archer in Kun-Lai Summit; Wildscale Hunter in Valley of the Four Winds)
@@ -178,11 +181,16 @@ ns.ReductionDebuffs = {
 	61042,  -- Mortal Smash
 	40220,  -- Mortal Strike
 	120436, -- Mortal Strike
+	136670, -- Mortal Strike
 	97857,  -- Phoenix Flame
+	135531, -- Reforged Soul
+	133767, -- Serious Wound
 	60084,  -- The Veil of Shadows
+	139550, -- Torment
 	115195, -- Toxic Shock
 	68881,  -- Unstable Water Nova
 	24674,  -- Veil of Shadow
+	140049, -- Wounding Strike
 }
 
 ns.PreventionDebuffs = {
