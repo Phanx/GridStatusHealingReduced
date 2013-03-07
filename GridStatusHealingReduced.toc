@@ -7,7 +7,7 @@
 ## Notes-esES: Mostrar sobre Grid los perjuicios que reducen o impiden la sanación recibida.
 ## Notes-esMX: Mostrar sobre Grid los perjuicios que reducen o impiden la sanación recibida.
 ## Notes-frFR: Afficher sur Grid les affaiblissements qui diminuent ou empêchent les soins reçus.
-## Notes-itIT: Mostrare su Grid le penalità che riducono o impediscono  la cura ricevuta.
+## Notes-itIT: Mostrare su Grid le penalità che riducono o impediscono la cura ricevuta.
 ## Notes-ptBR: Mostrar sobre Grid as penalidades que impedem ou reduzem a cura recebida.
 ## Notes-ptPT: Mostrar sobre Grid as penalidades que impedem ou reduzem a cura recebida.
 
