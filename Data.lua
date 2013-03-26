@@ -135,6 +135,7 @@ ns.ReductionDebuffs = {
 	--[[ MISTS OF PANDARIA - SOLO ]]
 	118228, -- Aimed Shot (Osul Veteran Archer in Kun-Lai Summit; Wildscale Hunter in Valley of the Four Winds)
 	111826, -- Ancient Poison (Krasari Tormentor in Krasarang Wilds)
+	139010, -- Darkest Darkness (Mumta in Isle of Thunder)
 	126195, -- Dirty Mouth (Vicejaw in Vale of Eternal Blossoms)
 	129564, -- Fiery Strike (Bataari Fire-Warrior in Kun-Lai Summit)
 	125353, -- Rank Bite (turtles in Kun-Lai Summit; Townlong Steppes)
