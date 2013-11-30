@@ -20,7 +20,7 @@ end })
 do
 	local GAME_LOCALE = GetLocale()
 	if GAME_LOCALE == "deDE" then
-		L["Healing reduced"] = "Heilung reduziert"
+		L["Healing reduced"] = "Heilung verringert"
 		L["Healing prevented"] = "Heilung verhindert"
 	elseif GAME_LOCALE == "esES" or GAME_LOCALE == "esMX" then
 		L["Healing reduced"] = "Sanación reducida"
