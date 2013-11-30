@@ -121,11 +121,14 @@ ns.ReductionDebuffs = {
 	86816,  -- Giant's Bane (Dragul Giantbutcher in Deepholm)
 
 	--[[ MISTS OF PANDARIA - RAID ]]
+	148375, -- Brutal Hemorrhage (Gate-Crasher Sav'ah in Siege of Orgrimmar)
 	126901, -- Mortal Rend (Kor'thik Fleshrender in Heart of Fear)
 	136670, -- Mortal Strike (Drakkari Frozen Warlord in Throne of Thunder)
 	115804, -- Mortal Wounds (Sha of Anger, monk, warrior)
 	139550, -- Torment (Tormented Spirit, Throne of Thunder)
 	140049, -- Wounding Strike (Zandalari Blade Initiate in Throne of Thunder)
+	144056, -- Xuen's Presence: Mortal Strike
+	144063, -- Xuen's Presence: Standard Raid Debuffs
 
 	--[[ MISTS OF PANDARIA - PARTY ]]
 	133001, -- Gas Bomb (Rak'gor Bloodrazor in Dagger in the Dark)
@@ -215,9 +218,10 @@ ns.PreventionDebuffs = {
 	76903,  -- Anti-Magic Prison (Void Seeker in Halls of Origination)
 
 	--[[ CATACLYSM - SOLO ]]
-	101497,  -- Aura of Deth'spair (Deth'tilac in Molten Front)
-	101340,  -- Suffocating Prey (Kirix in Molten Front)
+	101497, -- Aura of Deth'spair (Deth'tilac in Molten Front)
+	101340, -- Suffocating Prey (Kirix in Molten Front)
 
 	--[[ MISTS OF PANDARIA - RAID ]]
-	114078,  -- HUGE, SHARP TEETH! (Darkmoon Rabbit in Darkmoon Island)
+	114078, -- HUGE, SHARP TEETH! (Darkmoon Rabbit in Darkmoon Island)
+	148386, -- Black Ash (item on Timeless Isle)
 }
