@@ -1,15 +1,15 @@
 ﻿## Interface: 50400
-## Version: 5.4.1.wowi:revision
+## Version: 5.4.2.wowi:revision
 
 ## Title: GridStatusHealingReduced
 ## Notes: Grid plugin to show debuffs which reduce or prevent healing received.
-## Notes-deDE: Auf Grid die Schwächungszauber anzeigen, die die erhaltene Heilung verringern oder verhindern.
-## Notes-esES: Mostrar sobre Grid los perjuicios que reducen o impiden la sanación recibida.
-## Notes-esMX: Mostrar sobre Grid los perjuicios que reducen o impiden la sanación recibida.
-## Notes-frFR: Afficher sur Grid les affaiblissements qui diminuent ou empêchent les soins reçus.
-## Notes-itIT: Mostrare su Grid le penalità che riducono o impediscono la cura ricevuta.
-## Notes-ptBR: Mostrar sobre Grid as penalidades que impedem ou reduzem a cura recebida.
-## Notes-ptPT: Mostrar sobre Grid as penalidades que impedem ou reduzem a cura recebida.
+## Notes-deDE: Zeigt an Grid die Schwächungszauber, die die erhaltene Heilung verringern oder verhindern.
+## Notes-esES: Muestra en Grid los perjuicios que reducen o impiden la sanación recibida.
+## Notes-esMX: Muestra en Grid los perjuicios que reducen o impiden la sanación recibida.
+## Notes-frFR: Affiche sur Grid les affaiblissements qui diminuent ou empêchent les soins reçus.
+## Notes-itIT: Mostra su Grid le penalità che riducono o impediscono la cura ricevuta.
+## Notes-ptBR: Mostra no Grid as penalidades que impedem ou reduzem a cura recebida.
+## Notes-ptPT: Mostra no Grid as penalidades que impedem ou reduzem a cura recebida.
 
 ## Author: Phanx
 ## X-Email: addons@phanx.net
