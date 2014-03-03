@@ -1,7 +1,7 @@
 --[[--------------------------------------------------------------------
 	GridStatusHealingReduced
 	Grid plugin to show debuffs which reduce or prevent healing received.
-	Copyright (c) 2008-2013 Phanx <addons@phanx.net>. All rights reserved.
+	Copyright (c) 2008-2014 Phanx <addons@phanx.net>. All rights reserved.
 	See the accompanying README and LICENSE files for more information.
 	http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 	http://www.curse.com/addons/wow/gridstatushealingreduced
