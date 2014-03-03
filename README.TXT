@@ -2,7 +2,7 @@
 GridStatusHealingReduced
 ============================
 
-* Copyright (c) 2008-2013 Phanx. All rights reserved.
+* Copyright (c) 2008-2014 Phanx. All rights reserved.
 * See the accompanying LICENSE file for license terms.
 * http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
 * http://www.curse.com/addons/wow/gridstatushealingreduced

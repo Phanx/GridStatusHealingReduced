@@ -3,7 +3,7 @@
 
 ## Title: GridStatusHealingReduced
 ## Notes: Grid plugin to show debuffs which reduce or prevent healing received.
-## Notes-deDE: Zeigt an Grid die Schwächungszauber, die die erhaltene Heilung verringern oder verhindern.
+## Notes-deDE: Zeigt auf Grid die Schwächungszauber, die die erhaltene Heilung verringern oder verhindern.
 ## Notes-esES: Muestra en Grid los perjuicios que reducen o impiden la sanación recibida.
 ## Notes-esMX: Muestra en Grid los perjuicios que reducen o impiden la sanación recibida.
 ## Notes-frFR: Affiche sur Grid les affaiblissements qui diminuent ou empêchent les soins reçus.
@@ -13,7 +13,7 @@
 
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright (c) 2008-2013 Phanx. All rights reserved.
+## X-Copyright: Copyright (c) 2008-2014 Phanx. All rights reserved.
 ## X-License: See accompanying LICENSE file for details.
 ## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, itIT, ptBR, ruRU, koKR, zhCN, zhTW
 ## X-Localizations: enUS, deDE, esES, esMX, frFR, itIT, ptBR, ruRU, koKR, zhCN, zhTW
