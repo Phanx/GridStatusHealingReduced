@@ -102,12 +102,16 @@ function GSHR:PostInitialize()
 		local name = GetSpellInfo(id)
 		if name then
 			RD[id] = name
+		else
+			print("|cffff7f7fGridStatusHealingReduced:|r", id, "is not a valid spell ID, please report this!")
 		end
 	end
 	for _, id in ipairs(PreventionDebuffs) do
 		local name = GetSpellInfo(id)
 		if name then
 			PD[id] = name
+		else
+			print("|cffff7f7fGridStatusHealingReduced:|r", id, "is not a valid spell ID, please report this!")
 		end
 	end
 	ReductionDebuffs, PreventionDebuffs = RD, PD
