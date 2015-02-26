@@ -1,5 +1,5 @@
-﻿## Interface: 60000
-## Version: 6.0.2.103
+﻿## Interface: 60100
+## Version: @project-version@
 
 ## Title: GridStatusHealingReduced
 ## Notes: Grid plugin to show debuffs which reduce or prevent healing received.
@@ -12,7 +12,7 @@
 
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright (c) 2007-2014 Phanx. All rights reserved.
+## X-Copyright: Copyright (c) 2007-2015 Phanx. All rights reserved.
 ## X-Website: https://github.com/Phanx/GridStatusHealingReduced
 
 ## Dependencies: Grid

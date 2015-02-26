@@ -1,3 +1,7 @@
+### Version 6.1.0.38 (2014 Oct 26)
+
+* Updated for WoW 6.1
+
 ### Version 6.0.2.103 (October 20, 2014)
 
 * Added many new spell IDs
